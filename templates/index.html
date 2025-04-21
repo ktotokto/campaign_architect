@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Campaign Architect</h1>
+
+        {% if current_user.is_authenticated %}
+            <div class="welcome-message">
+                <p>Добро пожаловать обратно, <span class="dice">{{ current_user.username }}</span>!</p>
+            </div>
+
+            <div>
+                <a href="/campaigns" class="btn">Мои кампании</a>
+                <a href="/new-campaign" class="btn">Новая кампания</a>
+            </div>
+        {% else %}
+            <div class="welcome-message">
+                <p>Создавайте <span class="dice">эпические</span> приключения</p>
+                <p>Управляйте своими <span class="dice">кампаниями</span></p>
+            </div>
+
+            <div>
+                <a href="/login" class="btn">Войти</a>
+                <a href="/register" class="btn">Присоединиться</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

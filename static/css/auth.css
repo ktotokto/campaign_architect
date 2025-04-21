@@ -1,0 +1,148 @@
+body {
+  font-family: 'Times New Roman', serif;
+  background-color: #1a120b;
+  color: #3a3129;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.auth-container {
+  width: 100%;
+  max-width: 450px;
+  background-color: #f5f5dc;
+  padding: 2rem;
+  border: 3px solid #5e2c04;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.auth-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: linear-gradient(90deg, 
+    #5e2c04 0%, 
+    #c9a227 20%, 
+    #c9a227 80%, 
+    #5e2c04 100%);
+}
+
+
+
+.form-title {
+  color: #5e2c04;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  border-bottom: 2px solid #c9a227;
+  padding-bottom: 0.5rem;
+}
+
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #5e2c04;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.form-input {
+  width: 80%;
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 255, 240, 0.8);
+  border: 2px solid #5e2c04;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #3a3129;
+  transition: all 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #c9a227;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.3);
+}
+
+
+.btn-submit {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to bottom, #c9a227, #5e2c04);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(to bottom, #d4b328, #6e3a08);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+
+.form-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #5e2c04;
+  font-size: 0.9rem;
+}
+
+.form-link {
+  color: #5e2c04;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px dashed #c9a227;
+}
+
+.form-link:hover {
+  color: #c9a227;
+  border-bottom-style: solid;
+}
+
+
+.error-message {
+  color: #8b0000;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  display: block;
+  font-style: italic;
+}
+
+
+.form-group-checkbox {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.form-group-checkbox input {
+  margin-right: 0.5rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  a

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="fullscreen-form">
+  <div class="auth-container">
+    <div class="form-header">
+      <h2>Вход в систему</h2>
+    </div>
+
+    <div class="form-body">
+      <form method="POST" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.username.label(class="form-label") }}
+          {{ form.username(class="form-input", placeholder="Введите имя пользователя") }}
+          {% for error in form.username.errors %}
+          <span class="error-message">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-input", placeholder="Введите пароль") }}
+          {% for error in form.password.errors %}
+          <span class="error-message">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.remember_me() }}
+          {{ form.remember_me.label() }}
+        </div>
+
+        <button type="submit" class="btn-submit">Войти</button>
+
+        <div class="form-footer">
+          Нет аккаунта? <a href="{{ url_for('register') }}" class="form-link">Зарегистрируйтесь</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
