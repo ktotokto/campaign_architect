@@ -1,9 +1,13 @@
 import secrets
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from openpyxl.styles.builtins import title
+
+from data.campaign import Campaign
 from data.db_session import global_init, create_session
 from data.user import User
 from forms.login_form import LoginForm
+from forms.new_campaign_form import CampaignForm
 from forms.registration_form import RegistrationForm
 
 app = Flask(__name__)
@@ -22,12 +26,11 @@ def load_user(user_id):
     return session.query(User).get(int(user_id))
 
 
-
 @app.route('/')
 def index():
     return render_template('index.html',
-                         user=current_user,
-                         is_authenticated=current_user.is_authenticated)
+                           user=current_user,
+                           is_authenticated=current_user.is_authenticated)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -44,8 +47,6 @@ def register():
         session = create_session()
         session.add(user)
         session.commit()
-
-        flash('Регистрация прошла успешно! Теперь вы можете войти.', 'success')
         return redirect(url_for('login'))
 
     return render_template('register.html', form=form)
@@ -64,7 +65,6 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             next_page = request.args.get('next')
-            flash('Вы успешно вошли в систему!', 'success')
             return redirect(next_page or url_for('index'))
 
         flash('Неверное имя пользователя или пароль', 'danger')
@@ -72,7 +72,40 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route('/logout')
+@app.route('/campaigns')
+def campaigns():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    session = create_session()
+    campaigns_list = session.query(Campaign).filter(Campaign.user_id == current_user.id).all()
+    session.commit()
+    return render_template('campaigns.html', campaigns=campaigns_list)
+
+
+@app.route('/campaigns/<title>')
+def current_campaigns():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    return render_template('base.html')
+
+
+@app.route('/new-campaign', methods=['GET', 'POST'])
+def new_campaign():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    form = CampaignForm()
+    if form.validate_on_submit():
+        session = create_session()
+        campaign = Campaign(title=form.title.data, description=form.description.data,
+                            user_id=current_user.id)
+        session.add(campaign)
+        session.commit()
+        return redirect(url_for('index'))
+
+    return render_template('new_campaign.html', form=form)
+
+
+@app.route('/logaut')
 @login_required
 def logout():
     logout_user()

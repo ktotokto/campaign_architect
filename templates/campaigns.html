@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+<div class="hero-content">
+    {% if campaigns != [] %}
+    <h1>Список ваших компаний</h1>
+        <ul>
+            {% for campaign in campaigns %}
+                <li>{{ campaign.title }} <a href="/campaigns/{{ campaign.title }}" class="btn">Создать?</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <h1>У вас пока нет компаний</h1>
+    <div>
+        <a href="/new-campaign" class="btn">Создать?</a>
+    </div>
+    {% endif %}
+</div>
+</section>
+{% endblock %}
