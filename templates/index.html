@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-content">
+{% include 'navigate.html' %}
+<section class="base">
+    <div class="base-content">
         <h1>Campaign Architect</h1>
 
         {% if current_user.is_authenticated %}

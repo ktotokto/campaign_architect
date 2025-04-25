@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/campaign.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="campaign-page">
+  <nav class="campaign-nav">
+    <a href="/campaigns" class="back-btn">← Все кампании</a>
+    <h1 class="campaign-title">{{ campaign.title }}</h1>
+  </nav>
+
+  <div class="campaign-layout">
+    <aside class="campaign-sidebar">
+      <div class="sidebar-section">
+        <h3>📅 Детали кампании</h3>
+        <div class="campaign-meta">
+          <p><strong>Мастер:</strong> {{ campaign.dm_name }}</p>
+          <p><strong>Система:</strong> {{ campaign.system }}</p>
+          <p><strong>Дата создания:</strong> {{ campaign.created_at }}</p>
+          <p><strong>Статус:</strong> <span class="status-badge {{ campaign.status }}">{{ campaign.status }}</span></p>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>👥 Игроки ({{ campaign.players|length }})</h3>
+        <ul class="players-list">
+          {% for player in campaign.players %}
+          <li class="player-card">
+            <span class="player-avatar">{{ player.name[0]|upper }}</span>
+            <span class="player-name">{{ player.name }}</span>
+            <span class="player-class">{{ player.character_class }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        <button class="btn add-player-btn">+ Добавить игрока</button>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>🗺️ Ресурсы</h3>
+        <div class="resources-list">
+          <a href="#" class="resource-link">🌍 Карта мира</a>
+          <a href="#" class="resource-link">📖 Домашние правила</a>
+          <a href="#" class="resource-link">🎭 Персонажи НПС</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="campaign-main">
+      <div class="campaign-tabs">
+        <button class="tab-btn active" data-tab="notes">📝 Заметки</button>
+        <button class="tab-btn" data-tab="sessions">🎭 Сессии</button>
+        <button class="tab-btn" data-tab="characters">🧙 Персонажи</button>
+        <button class="tab-btn" data-tab="lore">📖 Лор</button>
+      </div>
+
+      <div class="tab-content active" id="notes">
+        <div class="editor-container">
+          <div class="editor-toolbar">
+            <button class="tool-btn">B</button>
+            <button class="tool-btn">I</button>
+            <button class="tool-btn">📷</button>
+            <button class="tool-btn">🔗</button>
+          </div>
+          <textarea class="campaign-notes">{{ campaign.notes }}</textarea>
+        </div>
+        <button class="btn save-btn">💾 Сохранить заметки</button>
+      </div>
+
+      <div class="tab-content" id="sessions">
+        <div class="sessions-list">
+          {% for session in campaign.sessions %}
+          <div class="session-card">
+            <div class="session-header">
+              <h4>Сессия #{{ session.number }}: {{ session.title }}</h4>
+              <span class="session-date">{{ session.date }}</span>
+            </div>
+            <p class="session-summary">{{ session.summary }}</p>
+            <div class="session-actions">
+              <a href="#" class="btn session-btn">📝 Заметки</a>
+              <a href="#" class="btn session-btn">🎭 Отчет</a>
+            </div>
+          </div>
+          {% endfor %}
+          <button class="btn add-session-btn">+ Новая сессия</button>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="campaign-footer">
+    <p>Кампания создана: {{ campaign.created_at }}</p>
+    <p>Последнее изменение: {{ campaign.updated_at }}</p>
+  </footer>
+</div>
+{% endblock %}

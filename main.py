@@ -1,7 +1,7 @@
 import secrets
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from openpyxl.styles.builtins import title
+
 
 from data.campaign import Campaign
 from data.db_session import global_init, create_session
@@ -83,10 +83,13 @@ def campaigns():
 
 
 @app.route('/campaigns/<title>')
-def current_campaigns():
+def current_campaigns(title):
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    return render_template('base.html')
+    session = create_session()
+    campaign = session.query(Campaign).filter(Campaign.title == title)
+    session.commit()
+    return render_template('campaign.html', campaign=campaign)
 
 
 @app.route('/new-campaign', methods=['GET', 'POST'])

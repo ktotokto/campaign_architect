@@ -1,0 +1,20 @@
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="logo">
+          <span class="logo-icon">⚔️</span>
+          <span>Campaign Architect</span>
+        </a>
+        <div class="nav-links">
+          <a href="/campaigns" class="nav-link">Мои кампании</a>
+          <a href="/new-campaign" class="nav-link">Создать новую</a>
+          <a href="/profile" class="nav-link">Профиль</a>
+        </div>
+      </div>
+    </nav>
+{% endblock %}
