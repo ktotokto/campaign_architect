@@ -1,0 +1,53 @@
+.character-sheet {
+  font-family: 'Georgia', serif;
+  background-color: #fdf6e3;
+  border: 2px solid #6b4633;
+  padding: 20px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.sheet-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sheet-header input {
+  font-size: 24px;
+  text-align: center;
+  width: 100%;
+  border: none;
+  background: transparent;
+  border-bottom: 1px dashed #6b4633;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stats-table th, .stats-table td {
+  border: 1px solid #aaa;
+  padding: 8px;
+  text-align: center;
+}
+
+.stats-table input {
+  width: 60px;
+  text-align: center;
+}
+
+.section input[type="text"],
+.section input[type="number"],
+.section textarea {
+  width: 90%;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 14px;
+}

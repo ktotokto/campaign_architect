@@ -66,7 +66,7 @@ def login():
             login_user(user, remember=form.remember_me.data)
             next_page = request.args.get('next')
             return redirect(next_page or url_for('index'))
-
+        session.commit()
         flash('Неверное имя пользователя или пароль', 'danger')
 
     return render_template('login.html', form=form)
@@ -87,9 +87,18 @@ def current_campaigns(title):
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
     session = create_session()
-    campaign = session.query(Campaign).filter(Campaign.title == title)
+    campaign = session.query(Campaign).filter(Campaign.title == title, Campaign.user_id == current_user.id).first()
     session.commit()
-    return render_template('campaign.html', campaign=campaign)
+    return render_template('campaign.html', campaign=campaign, username=current_user.username)
+
+@app.route('/campaigns/<title>/add_player')
+def add_player(title):
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    session = create_session()
+    campaign = session.query(Campaign).filter(Campaign.title == title, Campaign.user_id == current_user.id).first()
+    session.commit()
+    return render_template('add_player.html', campaign=campaign)
 
 
 @app.route('/new-campaign', methods=['GET', 'POST'])
@@ -100,7 +109,7 @@ def new_campaign():
     if form.validate_on_submit():
         session = create_session()
         campaign = Campaign(title=form.title.data, description=form.description.data,
-                            user_id=current_user.id)
+                            user_id=current_user.id, system=form.system.data)
         session.add(campaign)
         session.commit()
         return redirect(url_for('index'))

@@ -16,10 +16,9 @@
       <div class="sidebar-section">
         <h3>📅 Детали кампании</h3>
         <div class="campaign-meta">
-          <p><strong>Мастер:</strong> {{ campaign.dm_name }}</p>
+          <p><strong>Мастер:</strong> {{ username }}</p>
           <p><strong>Система:</strong> {{ campaign.system }}</p>
-          <p><strong>Дата создания:</strong> {{ campaign.created_at }}</p>
-          <p><strong>Статус:</strong> <span class="status-badge {{ campaign.status }}">{{ campaign.status }}</span></p>
+          <p><strong>Дата создания:</strong> {{ campaign.created_date_formatted }}</p>
         </div>
       </div>
 
@@ -34,15 +33,14 @@
           </li>
           {% endfor %}
         </ul>
-        <button class="btn add-player-btn">+ Добавить игрока</button>
+        <a href="/campaigns/{{ campaign.title }}/add_player" class="btn add-player-btn">+ Добавить игрока</a>
       </div>
 
       <div class="sidebar-section">
         <h3>🗺️ Ресурсы</h3>
         <div class="resources-list">
-          <a href="#" class="resource-link">🌍 Карта мира</a>
-          <a href="#" class="resource-link">📖 Домашние правила</a>
-          <a href="#" class="resource-link">🎭 Персонажи НПС</a>
+          <a href="#" class="resource-link">Граф-сюжета</a>
+          <a href="#" class="resource-link">?</a>
         </div>
       </div>
     </aside>
@@ -50,19 +48,16 @@
     <main class="campaign-main">
       <div class="campaign-tabs">
         <button class="tab-btn active" data-tab="notes">📝 Заметки</button>
-        <button class="tab-btn" data-tab="sessions">🎭 Сессии</button>
+        <button class="tab-btn" data-tab="lore">🎭 Сессии</button>
         <button class="tab-btn" data-tab="characters">🧙 Персонажи</button>
-        <button class="tab-btn" data-tab="lore">📖 Лор</button>
+        <button class="tab-btn" data-tab="lore">📖 Сюжет</button>
+        <button class="tab-btn" data-tab="lore">Заклинания</button>
+        <button class="tab-btn" data-tab="lore">Монстры</button>
+        <button class="tab-btn" data-tab="lore">Локации</button>
       </div>
 
       <div class="tab-content active" id="notes">
         <div class="editor-container">
-          <div class="editor-toolbar">
-            <button class="tool-btn">B</button>
-            <button class="tool-btn">I</button>
-            <button class="tool-btn">📷</button>
-            <button class="tool-btn">🔗</button>
-          </div>
           <textarea class="campaign-notes">{{ campaign.notes }}</textarea>
         </div>
         <button class="btn save-btn">💾 Сохранить заметки</button>
@@ -89,8 +84,8 @@
     </main>
   </div>
   <footer class="campaign-footer">
-    <p>Кампания создана: {{ campaign.created_at }}</p>
-    <p>Последнее изменение: {{ campaign.updated_at }}</p>
+    <p>Кампания создана: {{ campaign.created_date_formatted }}</p>
+    <p>Последнее изменение: {{ campaign.updated_date_formatted }}</p>
   </footer>
 </div>
 {% endblock %}
