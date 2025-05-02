@@ -7,7 +7,7 @@
 {% block content %}
 <div class="campaign-page">
   <nav class="campaign-nav">
-    <a href="/campaigns" class="back-btn">← Все кампании</a>
+    <a href="{{ url_for('campaigns') }}" class="back-btn">← Все кампании</a>
     <h1 class="campaign-title">{{ campaign.title }}</h1>
   </nav>
 
@@ -22,19 +22,22 @@
         </div>
       </div>
 
-      <div class="sidebar-section">
+      <div class="player-list-container">
         <h3>👥 Игроки ({{ campaign.players|length }})</h3>
-        <ul class="players-list">
+        <ul class="players-list" data-campaign-title="{{ campaign.title if campaign else '' }}">
           {% for player in campaign.players %}
           <li class="player-card">
-            <span class="player-avatar">{{ player.name[0]|upper }}</span>
-            <span class="player-name">{{ player.name }}</span>
-            <span class="player-class">{{ player.character_class }}</span>
+            <a href="{{ url_for('player_editor', title=campaign.title, name_player=player.name) }}">
+              <span class="player-name">{{ player.name }}</span>
+              <span class="player-class">Класс: {{ player.char_class }}</span><br>
+              <span class="player-level"> Уровень: {{ player.level }}</span>
+            </a>
+            <button class="btn delete-btn" data-player-name="{{ player.name }}">Удалить</button>
           </li>
           {% endfor %}
         </ul>
-        <a href="/campaigns/{{ campaign.title }}/add_player" class="btn add-player-btn">+ Добавить игрока</a>
       </div>
+      <a href="{{ url_for('add_player', title=campaign.title) }}" class="btn add-player-btn">+ Добавить игрока</a>
 
       <div class="sidebar-section">
         <h3>🗺️ Ресурсы</h3>
@@ -88,4 +91,5 @@
     <p>Последнее изменение: {{ campaign.updated_date_formatted }}</p>
   </footer>
 </div>
+<script src="{{ url_for('static', filename='js/delete-player.js') }}"></script>
 {% endblock %}

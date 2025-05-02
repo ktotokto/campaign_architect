@@ -30,17 +30,23 @@
 .stats-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.stats-table th, .stats-table td {
-  border: 1px solid #aaa;
-  padding: 8px;
-  text-align: center;
+.stats-table th,
+.stats-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  vertical-align: top;
 }
 
-.stats-table input {
+.stats-table input[type="number"] {
   width: 60px;
-  text-align: center;
+}
+
+.stats-table label {
+  display: block;
+  margin-bottom: 4px;
 }
 
 .section input[type="text"],

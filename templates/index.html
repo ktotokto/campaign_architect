@@ -16,8 +16,8 @@
             </div>
 
             <div>
-                <a href="/campaigns" class="btn">Мои кампании</a>
-                <a href="/new-campaign" class="btn">Новая кампания</a>
+                <a href="{{ url_for('campaigns') }}" class="btn">Мои кампании</a>
+                <a href="{{ url_for('new_campaign') }}" class="btn">Новая кампания</a>
             </div>
         {% else %}
             <div class="welcome-message">
@@ -26,8 +26,8 @@
             </div>
 
             <div>
-                <a href="/login" class="btn">Войти</a>
-                <a href="/register" class="btn">Присоединиться</a>
+                <a href="{{ url_for('login') }}" class="btn">Войти</a>
+                <a href="{{ url_for('register') }}" class="btn">Присоединиться</a>
             </div>
         {% endif %}
     </div>

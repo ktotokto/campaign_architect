@@ -18,7 +18,7 @@
         <div class="campaign-body">
           <p>{{ campaign.description|default("Описание отсутствует", true) }}</p>
           <div class="campaign-actions">
-            <a href="/campaigns/{{ campaign.title }}" class="btn btn-primary">Открыть</a>
+            <a href="{{ url_for('current_campaigns', title=campaign.title) }}" class="btn btn-primary">Открыть</a>
           </div>
         </div>
       </div>

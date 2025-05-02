@@ -1,14 +1,18 @@
 import secrets
-from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from datetime import datetime
 
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 from data.campaign import Campaign
 from data.db_session import global_init, create_session
+from data.player import Player
 from data.user import User
 from forms.login_form import LoginForm
 from forms.new_campaign_form import CampaignForm
 from forms.registration_form import RegistrationForm
+from forms.new_player import CharacterForm
+from const import SKILL_CHOICES
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(16)
@@ -89,16 +93,82 @@ def current_campaigns(title):
     session = create_session()
     campaign = session.query(Campaign).filter(Campaign.title == title, Campaign.user_id == current_user.id).first()
     session.commit()
-    return render_template('campaign.html', campaign=campaign, username=current_user.username)
+    return render_template('campaign/campaign.html', campaign=campaign, username=current_user.username)
 
-@app.route('/campaigns/<title>/add_player')
+
+@app.route('/campaigns/<title>/add_player', methods=['GET', 'POST'])
 def add_player(title):
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
+    form = CharacterForm()
+
+    if form.validate_on_submit():
+        session = create_session()
+        campaign = session.query(Campaign).filter(Campaign.title == title, Campaign.user_id == current_user.id).first()
+        new_char = Player(
+            name=form.name.data,
+            race=form.race.data,
+            char_class=form.char_class.data,
+            level=form.level.data,
+            background=form.background.data,
+            strength=form.strength.data,
+            dexterity=form.dexterity.data,
+            constitution=form.constitution.data,
+            intelligence=form.intelligence.data,
+            wisdom=form.wisdom.data,
+            charisma=form.charisma.data,
+            skills=",".join(form.skills.data) if form.skills.data else "",
+            campaign_id=campaign.id,
+            campaign=campaign
+        )
+        session.add(new_char)
+        campaign.updated_date = datetime.now()
+        session.commit()
+        return redirect(url_for('current_campaigns', title=title))
+
+    if not form.is_submitted():
+        form.strength.data = 10
+        form.dexterity.data = 10
+        form.constitution.data = 10
+        form.intelligence.data = 10
+        form.wisdom.data = 10
+        form.charisma.data = 10
+        form.skills = []
+    return render_template('campaign/add_player.html', form=form, SKILL_CHOICES=SKILL_CHOICES)
+
+
+@app.route('/campaigns/<title>/add_player/<name_player>', methods=['GET', 'POST'])
+def player_editor(title, name_player):
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    form = CharacterForm()
     session = create_session()
     campaign = session.query(Campaign).filter(Campaign.title == title, Campaign.user_id == current_user.id).first()
-    session.commit()
-    return render_template('add_player.html', campaign=campaign)
+    player = session.query(Player).filter(Player.name == name_player, Player.campaign == campaign).first()
+
+    if form.validate_on_submit():
+        form.populate_obj(player)
+        player.skills = ",".join(form.skills.data) if form.skills.data else ""
+        session.commit()
+        return redirect(url_for('current_campaigns', title=title))
+
+    form.name.data = player.name
+    form.race.data = player.race
+    form.char_class.data = player.char_class
+    form.level.data = player.level
+    form.background.data = player.background
+    form.strength.data = player.strength
+    form.dexterity.data = player.dexterity
+    form.constitution.data = player.constitution
+    form.intelligence.data = player.intelligence
+    form.wisdom.data = player.wisdom
+    form.charisma.data = player.charisma
+
+    if player.skills:
+        form.skills.data = [skill.strip() for skill in player.skills.split(',')]
+    else:
+        form.skills.data = []
+    return render_template('campaign/add_player.html', form=form, SKILL_CHOICES=SKILL_CHOICES)
 
 
 @app.route('/new-campaign', methods=['GET', 'POST'])
@@ -115,6 +185,18 @@ def new_campaign():
         return redirect(url_for('index'))
 
     return render_template('new_campaign.html', form=form)
+
+
+@app.route('/campaigns/<title>/delete_player/<name_player>', methods=['POST'])
+def delete_player(title, name_player):
+    session = create_session()
+    campaign = session.query(Campaign).filter(Campaign.title == title, Campaign.user_id == current_user.id).first()
+    player = session.query(Player).filter(Player.name == name_player, Player.campaign_id == campaign.id).first()
+
+
+    session.delete(player)
+    session.commit()
+    return jsonify({"success": True})
 
 
 @app.route('/logaut')
