@@ -1,0 +1,10 @@
+{% extends "campaign.html" %}
+
+{% block content %}
+<div class="tab-content active" id="notes">
+    {% for npc in campaign.npcs %}
+        <p>{ npc.name }</p>
+    {% endfor %}
+    <a href="#" class="btn add-player-btn">+ Добавить NPC</a>
+</div>
+{% endblock %}

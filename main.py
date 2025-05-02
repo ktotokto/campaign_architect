@@ -85,15 +85,29 @@ def campaigns():
     session.commit()
     return render_template('campaigns.html', campaigns=campaigns_list)
 
-
-@app.route('/campaigns/<title>')
+@app.route('/campaigns/<title>/campaign_notes')
 def current_campaigns(title):
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
     session = create_session()
     campaign = session.query(Campaign).filter(Campaign.title == title, Campaign.user_id == current_user.id).first()
     session.commit()
-    return render_template('campaign/campaign.html', campaign=campaign, username=current_user.username)
+    return render_template('campaign/campaign_notes.html', campaign=campaign, username=current_user.username)
+
+@app.route('/campaigns/<title>/campaign_npcs')
+def campaign_npcs(title):
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    session = create_session()
+    campaign = session.query(Campaign).filter(Campaign.title == title, Campaign.user_id == current_user.id).first()
+    session.commit()
+    return render_template('campaign/campaign_npcs.html', campaign=campaign, username=current_user.username)
+
+@app.route('/campaigns/<title>/add_npc', methods=['GET', 'POST'])
+def add_player(title):
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    form = CharacterForm()
 
 
 @app.route('/campaigns/<title>/add_player', methods=['GET', 'POST'])
@@ -182,7 +196,7 @@ def new_campaign():
                             user_id=current_user.id, system=form.system.data)
         session.add(campaign)
         session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('campaigns'))
 
     return render_template('new_campaign.html', form=form)
 
@@ -192,8 +206,6 @@ def delete_player(title, name_player):
     session = create_session()
     campaign = session.query(Campaign).filter(Campaign.title == title, Campaign.user_id == current_user.id).first()
     player = session.query(Player).filter(Player.name == name_player, Player.campaign_id == campaign.id).first()
-
-
     session.delete(player)
     session.commit()
     return jsonify({"success": True})

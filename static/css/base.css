@@ -1,9 +1,11 @@
 body {
-    background-color: #1a120b;
+    background-color: #362516;
     color: #e0d8b0;
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
 }
 
 .container {
@@ -15,7 +17,7 @@ body {
 a {
     color: #c9a227;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 a:hover {
@@ -28,17 +30,153 @@ a:hover {
     background: #5e2c04;
     color: #e0d8b0;
     padding: 12px 24px;
-    margin: 10px;
+    margin: 10px 0;
     border: 2px solid #c9a227;
     border-radius: 5px;
     font-size: 1.2rem;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .btn:hover {
     background: #c9a227;
     color: #5e2c04;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
+
+.campaign-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.campaign-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: #2c1a0f;
+    border-bottom: 2px solid #c9a227;
+}
+
+.back-btn {
+    font-size: 1.4rem;
+    color: #f5d742;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #f5d742;
+}
+
+.campaign-title {
+    font-size: 2rem;
+    color: #f5d742;
+    margin: 0;
+}
+
+/* === Макет кампании === */
+.campaign-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+
+.campaign-sidebar {
+    background: url("https://www.transparenttextures.com/patterns/denim.png") #2c1a0f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-section h3 {
+    color: #f5d742;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #c9a227;
+    padding-bottom: 5px;
+}
+
+.campaign-meta p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+/* === Список игроков === */
+.player-list-container {
+    background: #3a250f;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #5e2c04;
+}
+
+.players-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.player-card {
+    background: #4a2f0f;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.player-card:hover {
+    border-left-color: #c9a227;
+    background: #5e3b15;
+    transform: translateX(2px);
+}
+
+.player-card a {
+    color: inherit;
+    display: block;
+    text-decoration: none;
+}
+
+.player-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #f5d742;
+}
+
+.player-class,
+.player-level {
+    font-size: 0.9rem;
+    color: #bbb;
+    display: block;
+}
+
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #8b0000;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: #ff4500;
+    transform: scale(1.1);
+}
+
+.campaign-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap

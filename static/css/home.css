@@ -1,11 +1,4 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--light-color);
-  color: var(--text-dark);
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-}
+
 
 .base {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));

@@ -1,59 +1,185 @@
 .character-sheet {
-  font-family: 'Georgia', serif;
-  background-color: #fdf6e3;
-  border: 2px solid #6b4633;
-  padding: 20px;
-  margin: 20px auto;
-  width: 90%;
-  max-width: 800px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-family: 'Georgia', serif;
+    background-color: #2a1f14; /* Темно-коричневый фон */
+    border: 3px solid #b89683; /* Бронзовая рамка */
+    padding: 30px;
+    margin: 30px auto;
+    width: 95%;
+    max-width: 800px;
+    box-shadow: 0 0 15px rgba(184, 150, 131, 0.4);
+    color: #e0d8b0;
 }
 
 .sheet-header {
-  text-align: center;
-  margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.sheet-header input {
-  font-size: 24px;
-  text-align: center;
-  width: 100%;
-  border: none;
-  background: transparent;
-  border-bottom: 1px dashed #6b4633;
+.sheet-header h2 {
+    color: #f5d742;
+    font-size: 1.8rem;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.sheet-header input[type="text"] {
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    border-bottom: 2px dashed #c9a227;
+    color: #f5d742;
+    font-weight: bold;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.sheet-header input:focus {
+    border-bottom: 2px dashed #f5d742;
 }
 
 .section {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
+    background-color: #3a250f;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid #b89683;
 }
 
 .stats-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #3a250f;
+    border: 1px solid #5e2c04;
+    border-radius: var(--border-radius);
+    overflow: hidden;
 }
 
 .stats-table th,
 .stats-table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  vertical-align: top;
+    border: 1px solid #5e2c04;
+    padding: 12px;
+    vertical-align: top;
+    font-size: 1rem;
+}
+
+.stats-table th {
+    background-color: #4a3515;
+    color: #f5d742;
+    text-align: left;
 }
 
 .stats-table input[type="number"] {
-  width: 60px;
+    width: 60px;
+    padding: 6px;
+    border: 1px solid #5e2c04;
+    background-color: #2a1f14;
+    color: #f5d742;
+    border-radius: 4px;
+    font-size: 1rem;
+    text-align: center;
 }
 
 .stats-table label {
-  display: block;
-  margin-bottom: 4px;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.stats-table label input[type="checkbox"] {
+    margin-right: 6px;
+    transform: translateY(2px);
 }
 
 .section input[type="text"],
 .section input[type="number"],
 .section textarea {
-  width: 90%;
-  margin-bottom: 10px;
-  padding: 8px;
-  font-size: 14px;
+    width: 90%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #5e2c04;
+    background-color: #2a1f14;
+    color: #f5d742;
+    border-radius: var(--border-radius);
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.section input[type="text"]:focus,
+.section input[type="number"]:focus,
+.section textarea:focus {
+    border-color: #f5d742;
+    box-shadow: 0 0 5px rgba(245, 215, 66, 0.3);
+}
+
+.section textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modifier-label {
+    font-size: 0.9rem;
+    color: #bbb;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.btn.save-btn {
+    background-color: #b89683;
+    color: #2a1f14;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn.save-btn:hover {
+    background-color: #f5d742;
+    color: #5e2c04;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(245, 215, 66, 0.3);
+}
+
+.btn.cancel-btn {
+    background-color: #5e2c04;
+    color: #e0d8b0;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    border-radius: var(--border-radius);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn.cancel-btn:hover {
+    background-color: #ff4d4d;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.skills-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skills-list li {
+    margin-bottom: 6px;
+}
+
+.skills-list input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.skills-list label {
+    font-size: 0.95rem;
+    display: inline-block;
+    padding: 4px 0;
 }

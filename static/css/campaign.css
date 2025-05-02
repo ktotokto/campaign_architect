@@ -1,357 +1,401 @@
 :root {
-  --primary-color: #4a6fa5;
-  --secondary-color: #166088;
-  --accent-color: #4fc3f7;
-  --light-color: #f8f9fa;
-  --dark-color: #343a40;
-  --text-light: #ffffff;
-  --text-dark: #212529;
+  --primary-color: #b89683;
+  --secondary-color: #5e2c04;
+  --accent-color: #f5d742;
+  --light-color: #2a1f14;
+  --dark-color: #1a120b;
+  --text-light: #e0d8b0;
+  --text-dark: #3a250f;
   --success-color: #28a745;
   --warning-color: #ffc107;
   --danger-color: #dc3545;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   --border-radius: 8px;
 }
 
+body {
+    background-color: var(--dark-color);
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Georgia', serif;
+}
+
 .campaign-page {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--text-dark);
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 1rem;
+    font-family: 'Georgia', serif;
+    color: var(--text-light);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
 .campaign-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 2px solid var(--primary-color);
 }
 
 .back-btn {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: var(--border-radius);
-  transition: all 0.3s ease;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
 }
 
 .back-btn:hover {
-  background-color: rgba(74, 111, 165, 0.1);
+    background-color: rgba(184, 150, 131, 0.1);
+    color: var(--accent-color);
 }
 
 .campaign-title {
-  margin: 0;
-  color: var(--primary-color);
-  font-size: 2rem;
+    margin: 0;
+    font-size: 2rem;
+    color: var(--accent-color);
+    font-weight: bold;
 }
 
 .campaign-layout {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 2rem;
-  margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .campaign-sidebar {
-  background-color: var(--light-color);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  height: fit-content;
-}
-
-.sidebar-section {
-  margin-bottom: 2rem;
+    background-color: #3a250f;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid #5e2c04;
 }
 
 .sidebar-section h3 {
-  color: var(--primary-color);
-  margin-top: 0;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 0.5rem;
+    color: var(--accent-color);
+    margin-top: 0;
+    border-bottom: 1px solid #5e2c04;
+    padding-bottom: 0.5rem;
 }
 
 .campaign-meta p {
-  margin: 0.5rem 0;
+    margin: 0.5rem 0;
+    color: var(--text-light);
 }
 
 .status-badge {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: bold;
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
 }
 
 .status-badge.active {
-  background-color: var(--success-color);
-  color: white;
+    background-color: var(--success-color);
+    color: white;
 }
 
 .status-badge.paused {
-  background-color: var(--warning-color);
-  color: var(--text-dark);
+    background-color: var(--warning-color);
+    color: var(--text-dark);
 }
 
 .status-badge.ended {
-  background-color: var(--danger-color);
-  color: white;
+    background-color: var(--danger-color);
+    color: white;
 }
 
 .player-list-container {
-  max-height: 300px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #fafafa;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #5e2c04;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    background-color: #2c1a0f;
 }
 
 .player-list-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
+    background: #3a250f;
 }
 
 .player-list-container::-webkit-scrollbar-thumb {
-  background: #bbb;
-  border-radius: 4px;
+    background: var(--primary-color);
+    border-radius: 4px;
 }
 
 .player-list-container::-webkit-scrollbar-thumb:hover {
-  background: #999;
+    background: var(--accent-color);
 }
 
 .players-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .player-card {
-  margin-bottom: 15px;
-  border-radius: 8px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-color: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    background: #4a2f0f;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .player-card a {
-  display: block;
-  padding: 15px 20px;
-  text-decoration: none;
-  color: inherit;
-  border-left: 5px solid transparent;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: inherit;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
 }
 
 .player-card:hover a {
-  background-color: #f0f4f8;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-3px);
-  border-left-color: #4a90e2;
+    background: #5e3b15;
+    transform: translateY(-2px);
+    border-left-color: var(--accent-color);
 }
 
 .player-card:active a {
-  transform: scale(0.99);
+    transform: scale(0.99);
 }
 
 .player-name {
-  font-size: 1.3em;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 6px;
-  display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    display: block;
 }
 
 .player-class,
 .player-level {
-  font-size: 0.95em;
-  color: #555;
-  margin-right: 10px;
-}
-
-.add-player-btn {
-  width: 80%;
-  margin-top: 0.5rem;
-  background-color: var(--light-color);
-  border: 1px dashed var(--primary-color);
-  color: var(--primary-color);
-}
-
-.add-player-btn:hover {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.resources-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.resource-link {
-  color: var(--secondary-color);
-  text-decoration: none;
-  padding: 0.5rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.resource-link:hover {
-  background-color: rgba(22, 96, 136, 0.1);
-}
-
-.campaign-main {
-  background-color: var(--light-color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  padding: 1.5rem;
-}
-
-.campaign-tabs {
-  display: flex;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 1.5rem;
-}
-
-.tab-btn {
-  padding: 0.75rem 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  color: var(--secondary-color);
-  position: relative;
-}
-
-.tab-btn.active {
-  color: var(--primary-color);
-  font-weight: bold;
-}
-
-.tab-btn.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background-color: var(--primary-color);
-}
-
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-.editor-container {
-  margin-bottom: 1rem;
-}
-
-.tool-btn {
-  background-color: #f0f0f0;
-  border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.campaign-notes {
-  width: 90%;
-  min-height: 300px;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: var(--border-radius);
-  font-family: inherit;
-  resize: vertical;
-}
-
-.save-btn {
-  background-color: var(--success-color);
-  color: white;
-}
-
-.sessions-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.session-card {
-  background-color: white;
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-}
-
-.session-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.session-date {
-  color: var(--secondary-color);
-  font-size: 0.9rem;
-}
-
-.session-summary {
-  color: var(--text-dark);
-  margin-bottom: 1.5rem;
-}
-
-.session-actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.session-btn {
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-}
-
-.add-session-btn {
-  width: 100%;
-  margin-top: 1rem;
-  background-color: var(--light-color);
-  border: 1px dashed var(--primary-color);
-  color: var(--primary-color);
-}
-
-.add-session-btn:hover {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.campaign-footer {
-  text-align: center;
-  color: var(--secondary-color);
-  font-size: 0.9rem;
-  padding: 1rem;
-  border-top: 1px solid #eee;
-  margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #bbb;
+    display: block;
 }
 
 .delete-btn {
-    background-color: #ff4d4d;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #8b0000;
     color: white;
+    font-size: 1rem;
+    padding: 4px 8px;
     border: none;
-    padding: 6px 10px;
-    margin-left: 10px;
-    cursor: pointer;
-    font-size: 14px;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .delete-btn:hover {
-    background-color: #e60000;
+    background: #ff4500;
+    transform: scale(1.1);
+}
+
+.add-player-btn {
+    margin-top: 1rem;
+    background: transparent;
+    border: 2px dashed var(--accent-color);
+    color: var(--accent-color);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.add-player-btn:hover {
+    background: var(--accent-color);
+    color: var(--dark-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(245, 215, 66, 0.3);
+}
+
+.resources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.resource-link {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.resource-link:hover {
+    background-color: rgba(184, 150, 131, 0.1);
+    color: var(--accent-color);
+}
+
+.campaign-main {
+    background-color: #2c1a0f;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    border: 1px solid #5e2c04;
+}
+
+.campaign-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    background: #3a250f;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid #5e2c04;
+}
+
+.tab-btn {
+    background: #5e2c04;
+    color: var(--text-light);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: var(--accent-color);
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(245, 215, 66, 0.4);
+}
+
+.tab-content {
+    display: none;
+    background: #3a250f;
+    border: 1px solid #5e2c04;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.editor-container {
+    background: #4a2f0f;
+    border: 1px solid #5e2c04;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.campaign-notes {
+    width: 90%;
+    min-height: 300px;
+    background: #1a120b;
+    color: var(--text-light);
+    border: 1px solid #5e2c04;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    resize: vertical;
+    font-family: 'Georgia', serif;
+}
+
+.save-btn {
+    background-color: var(--accent-color);
+    color: #5e2c04;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: var(--border-radius);
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(245, 215, 66, 0.3);
+}
+
+.sessions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.session-card {
+    background: #3a250f;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid #5e2c04;
+    transition: transform 0.3s ease;
+}
+
+.session-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.session-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.session-date {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.session-summary {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.session-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.session-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.session-btn:hover {
+    background-color: var(--accent-color);
+    color: #5e2c04;
+    transform: translateY(-2px);
+}
+
+.add-session-btn {
+    background-color: transparent;
+    border: 2px dashed var(--accent-color);
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.add-session-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(245, 215, 66, 0.3);
+}
+
+.campaign-footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    padding: 1rem;
+    border-top: 1px solid #5e2c04;
+    margin-top: 2rem;
 }
