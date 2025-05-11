@@ -7,12 +7,13 @@ from wtforms import ValidationError
 
 from data.db_session import create_session
 from data.user import User
+from forms.validators import no_invalid_url_chars
 
 
 class RegistrationForm(FlaskForm):
     username = StringField('Имя пользователя', validators=[
         DataRequired(),
-        Length(min=3, max=25)
+        Length(min=3, max=25), no_invalid_url_chars()
     ], render_kw={"placeholder": "Придумайте логин"})
 
     email = EmailField('Email', validators=[

@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "campaign.html" %}
+{% block content %}
+<div class="tab-content active">
+    <div class="filters">
+        <input type="text" id="search-name" placeholder="Поиск по названию..." class="form-input">
+        <input type="number" id="filter-level" placeholder="Уровень (0-9)" min="0" max="9" class="form-input">
+    </div>
 
-</body>
-</html>
+    <div class="scroll-vertical-container">
+        <table class="stats-table" id="spell-table">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Уровень</th>
+                <th>Школа</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for spell in campaign.spells %}
+            <tr class="npc-row"
+                data-name="{{ spell.name }}"
+                data-level="{{ spell.level }}">
+                <td>{{ spell.name }}</td>
+                <td>{{ spell.level }}</td>
+                <td>{{ spell.school }}</td>
+                <td>
+                    <a href="{{ url_for('edit_spell', title=campaign.title, spell_id=spell.id) }}" class="btn save-btn">🪶
+                        Ред.</a>
+                    <button type="button" class="btn spell-delete-btn" data-spell-id="{{ spell.id }}">🗑️ Удалить
+                    </button>
+                    <div id="spells-container" data-campaign-title="{{ campaign.title.replace(' ', '_') }}"></div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ url_for('add_spell', title=campaign.title) }}" class="btn add-player-btn">+ Добавить заклинание</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/campaign.js') }}"></script>
+{% endblock %}

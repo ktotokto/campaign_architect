@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_player.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="tab-content active">
+    <form method="post"  enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="character-sheet">
+            <div class="sheet-header">
+                <h2>NPC</h2>
+                {{ form.name(class="input", placeholder="Имя персонажа") }}
+            </div>
+
+            <div class="section">
+                <h3>Раса / Класс / Уровень</h3>
+                {{ form.race(class="input", placeholder="Раса") }}
+                {{ form.char_class(class="input", placeholder="Класс") }}
+                {{ form.level(class="input", placeholder="Уровень", min=1, max=20) }}
+            </div>
+
+            <div class="section">
+                <h3>Локация</h3>
+                <select id="location" name="location" class="form-input">
+                    <option value="">Выберите локацию</option>
+                    {% for location in locations %}
+                        <option value="{{ location.name }}">{{ location.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="section">
+                <h3>Описание</h3>
+                {{ form.background(class="input", placeholder="Описание персонажа...") }}
+            </div>
+
+            <div class="section">
+                <h3>Характеристики</h3>
+                <table class="stats-table">
+                <tr>
+                    <td>Сила</td>
+                    <td><input type="number" id="str" name="strength" value="{{ form.strength.data }}" min="1" max="30">
+                    </td>
+                    <td><span id="mod-str">+0</span></td>
+                </tr>
+                <tr>
+                    <td>Ловкость</td>
+                    <td><input type="number" id="dex" name="dexterity" value="{{ form.dexterity.data }}" min="1"
+                               max="30"></td>
+                    <td><span id="mod-dex">+0</span></td>
+                </tr>
+                <tr>
+                    <td>Телосложение</td>
+                    <td><input type="number" id="con" name="constitution" value="{{ form.constitution.data }}" min="1"
+                               max="30"></td>
+                    <td><span id="mod-con">+0</span></td>
+                </tr>
+                <tr>
+                    <td>Интеллект</td>
+                    <td><input type="number" id="int" name="intelligence" value="{{ form.intelligence.data }}" min="1"
+                               max="30"></td>
+                    <td><span id="mod-int">+0</span></td>
+                </tr>
+                <tr>
+                    <td>Мудрость</td>
+                    <td><input type="number" id="wis" name="wisdom" value="{{ form.wisdom.data }}" min="1" max="30">
+                    </td>
+                    <td><span id="mod-wis">+0</span></td>
+                </tr>
+                <tr>
+                    <td>Харизма</td>
+                    <td><input type="number" id="cha" name="charisma" value="{{ form.charisma.data }}" min="1" max="30">
+                    </td>
+                    <td><span id="mod-cha">+0</span></td>
+                </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3>Загрузить изображение</h3>
+                <input type="file" name="image" accept="image/*" class="form-input form-file-input">
+            </div>
+
+            <div class="section">
+                <button type="submit" class="btn save-btn">💾 Сохранить</button>
+                <button type="button" class="btn cancel-btn"
+                        onclick="window.location.href='{{ url_for('campaign_npcs', title=campaign.title) }}'">❌ Отмена</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='js/stats.js') }}"></script>
+{% endblock %}

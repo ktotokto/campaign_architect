@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_player.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="tab-content active">
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="character-sheet">
+            <div class="sheet-header">
+                <h2>Предмет</h2>
+                {{ form.name(class="input", placeholder="Название предмета") }}
+            </div>
+
+            <div class="section">
+                <h3>Основные параметры</h3>
+                {{ form.item_type(class="form-input", placeholder="Оружие / Броня / Артефакт") }}
+                {{ form.rarity(class="form-input", placeholder="Обычный / Редкий / Легендарный") }}
+                {{ form.weight(class="form-input", placeholder="Вес в футах", step="any") }}
+                {{ form.value(class="form-input", placeholder="Стоимость (например: 50 золотых)") }}
+            </div>
+
+            <div class="section">
+                <h3>Описание</h3>
+                {{ form.description(rows="4", placeholder="Описание предмета...") }}
+            </div>
+
+            <div class="section">
+                <h3>Изображение</h3>
+                <input type="file" name="image" accept="image/*" class="form-input">
+            </div>
+
+            <div class="section">
+                <button type="submit" class="btn save-btn">💾 Сохранить</button>
+                <button type="button" class="btn cancel-btn"
+                        onclick="window.location.href='{{ url_for('campaign_items', title=campaign.title) }}'">❌ Отмена</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

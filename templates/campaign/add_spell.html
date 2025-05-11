@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_player.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="tab-content active">
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="character-sheet">
+            <div class="sheet-header">
+                <h2>Заклинание</h2>
+                {{ form.name.label }}
+                {{ form.name(class="input", placeholder="Название заклинания") }}
+            </div>
+
+            <div class="section">
+                <h3>Основные параметры</h3>
+                {{ form.level.label }}
+                {{ form.level(class="form-input", min=0, max=9) }}
+
+                {{ form.school.label }}
+                {{ form.school(class="form-input", placeholder="Школа заклинания (например: Эвокация)") }}
+
+                {{ form.range.label }}
+                {{ form.range(class="form-input", placeholder="Дистанция применения (например: 60 футов)") }}
+
+                {{ form.duration.label }}
+                {{ form.duration(class="form-input", placeholder="Длительность (например: Концентрация, до 1 часа)") }}
+
+                {{ form.casting_time.label }}
+                {{ form.casting_time(class="form-input", placeholder="Время накладывания (например: 1 действие)") }}
+            </div>
+
+            <div class="section">
+                <h3>Компоненты</h3>
+                {{ form.components.label }}
+                {{ form.components(class="form-input", placeholder="Компоненты (например: Материальный, Слово)") }}
+                {{ form.description.label }}
+                {{ form.description(class="form-input") }}
+            </div>
+
+            <div class="section">
+                <button type="submit" class="btn save-btn">💾 Сохранить</button>
+                <button type="button" class="btn cancel-btn"
+                        onclick="window.location.href='{{ url_for('campaign_spells', title=campaign.title) }}'">❌ Отмена</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

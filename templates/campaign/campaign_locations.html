@@ -1,0 +1,46 @@
+{% extends "campaign.html" %}
+{% block content %}
+<div class="tab-content active">
+    <div class="filters">
+        <input type="text" id="search-location-name" placeholder="Поиск по названию..." class="form-input">
+        <input type="text" id="filter-location-type" placeholder="Фильтр по типу..." class="form-input">
+    </div>
+    <table class="stats-table" id="location-table">
+        <thead>
+            <tr>
+                <th>Изображение</th>
+                <th>Название</th>
+                <th>Тип</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for location in campaign.locations %}
+            <tr class="location-row"
+                data-name="{{ location.name }}"
+                data-type="{{ location.type or '' }}">
+                <td>
+                    {% if location.image %}
+                    <img src="{{ url_for('static', filename=location.image) }}" alt="{{ location.name }}" width="50">
+                    {% else %}
+                    <span>Без изображения</span>
+                    {% endif %}
+                </td>
+                <td>{{ location.name }}</td>
+                <td>{{ location.type or '—' }}</td>
+                <td>
+                    <a href="{{ url_for('location_editor', title=campaign.title, location_id=location.id) }}" class="btn save-btn">Редактировать</a>
+                    <button type="button" class="btn cancel-btn location-delete-btn" data-location-id="{{ location.id }}">Удалить</button>
+                    <div id="locations-container" data-campaign-title="{{ campaign.title.replace(' ', '_') }}"></div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('add_location', title=campaign.title) }}" class="btn add-player-btn">+ Добавить локацию</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/campaign.js') }}"></script>
+{% endblock %}

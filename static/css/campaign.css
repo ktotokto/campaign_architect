@@ -1,21 +1,13 @@
-:root {
-  --primary-color: #b89683;
-  --secondary-color: #5e2c04;
-  --accent-color: #f5d742;
-  --light-color: #2a1f14;
-  --dark-color: #1a120b;
-  --text-light: #e0d8b0;
-  --text-dark: #3a250f;
-  --success-color: #28a745;
-  --warning-color: #ffc107;
-  --danger-color: #dc3545;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --border-radius: 8px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
 }
 
 body {
-    background-color: var(--dark-color);
-    color: var(--text-light);
+    background-color: #1a120b;
+    color: #e0d8b0;
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -24,7 +16,7 @@ body {
 
 .campaign-page {
     font-family: 'Georgia', serif;
-    color: var(--text-light);
+    color: #e0d8b0;
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
@@ -35,27 +27,29 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 2px solid #b89683;
 }
 
 .back-btn {
-    color: var(--accent-color);
+    color: #f5d742;
     text-decoration: none;
     font-weight: bold;
+    margin-left: 2%;
     padding: 0.5rem 1rem;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
 .back-btn:hover {
     background-color: rgba(184, 150, 131, 0.1);
-    color: var(--accent-color);
+    color: #f5d742;
 }
 
 .campaign-title {
     margin: 0;
+    margin-right: 2%;
     font-size: 2rem;
-    color: var(--accent-color);
+    color: #f5d742;
     font-weight: bold;
 }
 
@@ -68,14 +62,14 @@ body {
 
 .campaign-sidebar {
     background-color: #3a250f;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     padding: 1.5rem;
-    box-shadow: var(--shadow);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     border: 1px solid #5e2c04;
 }
 
 .sidebar-section h3 {
-    color: var(--accent-color);
+    color: #f5d742;
     margin-top: 0;
     border-bottom: 1px solid #5e2c04;
     padding-bottom: 0.5rem;
@@ -83,7 +77,7 @@ body {
 
 .campaign-meta p {
     margin: 0.5rem 0;
-    color: var(--text-light);
+    color: #e0d8b0;
 }
 
 .status-badge {
@@ -95,17 +89,17 @@ body {
 }
 
 .status-badge.active {
-    background-color: var(--success-color);
+    background-color: #28a745;
     color: white;
 }
 
 .status-badge.paused {
-    background-color: var(--warning-color);
-    color: var(--text-dark);
+    background-color: #ffc107;
+    color: #3a250f;
 }
 
 .status-badge.ended {
-    background-color: var(--danger-color);
+    background-color: #dc3545;
     color: white;
 }
 
@@ -113,7 +107,7 @@ body {
     max-height: 300px;
     overflow-y: auto;
     border: 1px solid #5e2c04;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     padding: 10px;
     background-color: #2c1a0f;
 }
@@ -123,12 +117,12 @@ body {
 }
 
 .player-list-container::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
+    background: #b89683;
     border-radius: 4px;
 }
 
 .player-list-container::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-color);
+    background: #f5d742;
 }
 
 .players-list {
@@ -151,14 +145,14 @@ body {
     padding: 10px 15px;
     text-decoration: none;
     color: inherit;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
 .player-card:hover a {
     background: #5e3b15;
     transform: translateY(-2px);
-    border-left-color: var(--accent-color);
+    border-left-color: #f5d742;
 }
 
 .player-card:active a {
@@ -168,7 +162,7 @@ body {
 .player-name {
     font-size: 1.2rem;
     font-weight: bold;
-    color: var(--accent-color);
+    color: #f5d742;
     display: block;
 }
 
@@ -201,15 +195,15 @@ body {
 .add-player-btn {
     margin-top: 1rem;
     background: transparent;
-    border: 2px dashed var(--accent-color);
-    color: var(--accent-color);
+    border: 2px dashed #f5d742;
+    color: #f5d742;
     font-weight: bold;
     transition: all 0.3s ease;
 }
 
 .add-player-btn:hover {
-    background: var(--accent-color);
-    color: var(--dark-color);
+    background: #f5d742;
+    color: #1a120b;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(245, 215, 66, 0.3);
 }
@@ -221,7 +215,7 @@ body {
 }
 
 .resource-link {
-    color: var(--text-light);
+    color: #e0d8b0;
     text-decoration: none;
     padding: 0.5rem;
     border-radius: 4px;
@@ -230,13 +224,13 @@ body {
 
 .resource-link:hover {
     background-color: rgba(184, 150, 131, 0.1);
-    color: var(--accent-color);
+    color: #f5d742;
 }
 
 .campaign-main {
     background-color: #2c1a0f;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     padding: 1.5rem;
     border: 1px solid #5e2c04;
 }
@@ -247,13 +241,13 @@ body {
     margin-bottom: 1.5rem;
     background: #3a250f;
     padding: 10px;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     border: 1px solid #5e2c04;
 }
 
 .tab-btn {
     background: #5e2c04;
-    color: var(--text-light);
+    color: #e0d8b0;
     padding: 0.75rem 1.5rem;
     border: none;
     cursor: pointer;
@@ -262,7 +256,7 @@ body {
 }
 
 .tab-btn.active {
-    color: var(--accent-color);
+    color: #f5d742;
     font-weight: bold;
     box-shadow: 0 0 8px rgba(245, 215, 66, 0.4);
 }
@@ -271,7 +265,7 @@ body {
     display: none;
     background: #3a250f;
     border: 1px solid #5e2c04;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     padding: 1.5rem;
     margin-top: 1rem;
 }
@@ -284,28 +278,28 @@ body {
     background: #4a2f0f;
     border: 1px solid #5e2c04;
     padding: 1rem;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
 }
 
 .campaign-notes {
     width: 90%;
     min-height: 300px;
     background: #1a120b;
-    color: var(--text-light);
+    color: #e0d8b0;
     border: 1px solid #5e2c04;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     padding: 1rem;
     resize: vertical;
     font-family: 'Georgia', serif;
 }
 
 .save-btn {
-    background-color: var(--accent-color);
+    background-color: #f5d742;
     color: #5e2c04;
     border: none;
     padding: 10px 20px;
     font-size: 1.2rem;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     margin-top: 1rem;
     transition: all 0.3s ease;
 }
@@ -325,8 +319,8 @@ body {
 .session-card {
     background: #3a250f;
     padding: 1.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     border: 1px solid #5e2c04;
     transition: transform 0.3s ease;
 }
@@ -344,12 +338,12 @@ body {
 }
 
 .session-date {
-    color: var(--secondary-color);
+    color: #5e2c04;
     font-size: 0.9rem;
 }
 
 .session-summary {
-    color: var(--text-light);
+    color: #e0d8b0;
     margin-bottom: 1.5rem;
 }
 
@@ -359,25 +353,25 @@ body {
 }
 
 .session-btn {
-    background-color: var(--secondary-color);
+    background-color: #5e2c04;
     color: white;
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .session-btn:hover {
-    background-color: var(--accent-color);
+    background-color: #f5d742;
     color: #5e2c04;
     transform: translateY(-2px);
 }
 
 .add-session-btn {
     background-color: transparent;
-    border: 2px dashed var(--accent-color);
-    color: var(--accent-color);
+    border: 2px dashed #f5d742;
+    color: #f5d742;
     padding: 0.5rem 1rem;
     font-size: 1.1rem;
     width: 100%;
@@ -385,8 +379,8 @@ body {
 }
 
 .add-session-btn:hover {
-    background-color: var(--accent-color);
-    color: var(--text-dark);
+    background-color: #f5d742;
+    color: #1a120b;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(245, 215, 66, 0.3);
 }
@@ -394,8 +388,94 @@ body {
 .campaign-footer {
     text-align: center;
     font-size: 0.9rem;
-    color: var(--secondary-color);
+    color: #5e2c04;
     padding: 1rem;
     border-top: 1px solid #5e2c04;
     margin-top: 2rem;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filters .form-input,
+.filters input[type="number"] {
+    width: auto;
+    min-width: 150px;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.stats-table th {
+    background-color: #4a3515;
+    color: #f5d742;
+    text-align: left;
+}
+
+.stats-table td {
+    vertical-align: middle;
+    padding: 12px;
+}
+
+.btn.npc-delete-btn,
+.btn.player-btn {
+    background: linear-gradient(145deg, #b89683, #7a5e47);
+    color: #2a1f14;
+    border: none;
+    padding: 6px 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.btn.npc-delete-btn:hover,
+.btn.player-btn:hover {
+    background-color: #f5d742;
+    color: #5e2c04;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(245, 215, 66, 0.3);
+}
+
+.stats-table td img {
+    max-width: 50px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.scroll-vertical-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+    overflow-x: hidden;
+}
+
+.scroll-vertical-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll-vertical-container::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-horizontal {
+    display: none;
+}
+
+.npc-row {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.npc-row:hover {
+    background: linear-gradient(to right bottom, #2c2f4a, #1c1f2e);
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.05);
+    transform: scale(1.01);
+    border-left: 4px solid #7b61ff;
 }

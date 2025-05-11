@@ -1,11 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, TextAreaField, SelectMultipleField, SubmitField
+from wtforms import StringField, IntegerField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, NumberRange
-from const import SKILL_CHOICES
+
+from data.npc import NPC
+from forms.validators import no_invalid_url_chars, validate_unique_name
 
 
-class CharacterForm(FlaskForm):
-    name = StringField('Имя персонажа', validators=[DataRequired()])
+class NpcForm(FlaskForm):
+    name = StringField('Имя персонажа', validators=[DataRequired(), no_invalid_url_chars(), validate_unique_name(NPC)])
     race = StringField('Раса', validators=[DataRequired()])
     char_class = StringField('Класс', validators=[DataRequired()])
     level = IntegerField('Уровень', validators=[
@@ -21,6 +23,9 @@ class CharacterForm(FlaskForm):
     wisdom = IntegerField('Мудрость', validators=[NumberRange(min=1, max=30)])
     charisma = IntegerField('Харизма', validators=[NumberRange(min=1, max=30)])
 
-    skills = SelectMultipleField('Выберите навыки', choices=SKILL_CHOICES)
-
     submit = SubmitField('Сохранить персонажа')
+
+    def __init__(self, *args, obj=None, campaign_id=None, **kwargs):
+        super(NpcForm, self).__init__(*args, **kwargs)
+        self.campaign_id = campaign_id
+        self.obj = obj

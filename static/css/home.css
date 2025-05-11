@@ -1,129 +1,126 @@
-
-
 .base {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: var(--text-light);
-  padding: 4rem 2rem;
-  text-align: center;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+    color: #e0d8b0;
+    padding: 4rem 2rem;
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .base-content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  position: relative;
-  z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .campaigns-container {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 0 2rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 2rem;
 }
 
 .campaigns-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .campaign-card {
-  background-color: var(--text-light);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-left: 4px solid var(--accent-color);
+    background-color: #e0d8b0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #f5d742;
 }
 
 .campaign-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .campaign-header {
-  background-color: var(--primary-color);
-  color: var(--text-light);
-  padding: 1rem;
-  font-size: 1.2rem;
-  font-weight: bold;
+    background-color: #b89683;
+    color: #e0d8b0;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .campaign-body {
-  padding: 1.5rem;
-  color: var(--text-dark);
+    padding: 1.5rem;
+    color: #3a3129;
 }
 
 .campaign-meta {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #5e2c04;
 }
 
 .campaign-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
 }
 
 .btn {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  text-align: center;
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
 }
 
 .btn-primary {
-  background-color: var(--accent-color);
-  color: var(--text-dark);
+    background-color: #f5d742;
+    color: #3a3129;
 }
 
 .btn-primary:hover {
-  background-color: #3da8d8;
-  color: var(--text-light);
+    background-color: #3da8d8;
+    color: #e0d8b0;
 }
 
 .btn-outline {
-  border: 1px solid var(--accent-color);
-  color: var(--accent-color);
+    border: 1px solid #f5d742;
+    color: #f5d742;
 }
 
 .btn-outline:hover {
-  background-color: var(--accent-color);
-  color: var(--text-light);
+    background-color: #f5d742;
+    color: #e0d8b0;
 }
 
 #candles-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .candle-light {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #ff9d00;
-  border-radius: 50%;
-  box-shadow: 0 0 10px 5px #ff9d00;
-  opacity: 0.7;
-  animation: flicker 3s infinite alternate;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ff9d00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 5px #ff9d00;
+    opacity: 0.7;
+    animation: flicker 3s infinite alternate;
 }
 
 .candle-light:nth-child(1) { top: 15%; left: 20%; }
@@ -134,6 +131,6 @@
 .candle-light:nth-child(6) { top: 10%; left: 65%; }
 
 @keyframes flicker {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.1); }
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.1); }
 }

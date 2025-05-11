@@ -1,167 +1,154 @@
-:root {
-  --primary-color: #b89683;
-  --secondary-color: #5e2c04;
-  --accent-color: #f5d742;
-  --light-bg: #fdf6e3;
-  --dark-bg: #1a120b;
-  --text-dark: #3a3129;
-  --text-light: #e0d8b0;
-  --error-color: #8b0000;
-  --border-radius: 8px;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
 .fullscreen-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-size: cover;
-  padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    padding: 20px;
 }
 
 .auth-container {
-  width: 100%;
-  max-width: 450px;
-  background-color: var(--light-bg);
-  padding: 2rem;
-  border: 3px solid var(--secondary-color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  position: relative;
+    width: 100%;
+    max-width: 450px;
+    background-color: #fdf6e3;
+    padding: 2rem;
+    border: 3px solid #5e2c04;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 .auth-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 15px;
-  background: linear-gradient(90deg,
-    var(--secondary-color) 0%,
-    var(--accent-color) 20%,
-    var(--accent-color) 80%,
-    var(--secondary-color) 100%);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: linear-gradient(90deg,
+        #5e2c04 0%,
+        #f5d742 20%,
+        #f5d742 80%,
+        #5e2c04 100%);
 }
 
 .form-header h2 {
-  color: var(--secondary-color);
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  letter-spacing: 1px;
-  border-bottom: 2px solid var(--accent-color);
-  padding-bottom: 0.5rem;
+    color: #5e2c04;
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #f5d742;
+    padding-bottom: 0.5rem;
 }
 
 .form-body form {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
-  position: relative;
+    margin-bottom: 1.5rem;
+    position: relative;
 }
 
 .form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--secondary-color);
-  font-weight: bold;
-  font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #5e2c04;
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
 .form-input,
 select.form-input {
-  width: 90%;
-  padding: 0.75rem 1rem;
-  background-color: rgba(255, 255, 240, 0.8);
-  border: 2px solid var(--secondary-color);
-  border-radius: var(--border-radius);
-  font-family: 'Georgia', serif;
-  font-size: 1rem;
-  color: var(--text-dark);
-  transition: all 0.3s ease;
-  outline: none;
+    width: 90%;
+    padding: 0.75rem 1rem;
+    background-color: rgba(255, 255, 240, 0.8);
+    border: 2px solid #5e2c04;
+    border-radius: 8px;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    color: #3a3129;
+    transition: all 0.3s ease;
+    outline: none;
 }
 
 .form-input:focus {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.3);
+    border-color: #f5d742;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.3);
 }
 
 .form-group-checkbox {
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-  font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 0.95rem;
 }
 
 .form-group-checkbox input[type="checkbox"] {
-  margin-right: 0.5rem;
-  accent-color: var(--secondary-color);
-  cursor: pointer;
+    margin-right: 0.5rem;
+    accent-color: #5e2c04;
+    cursor: pointer;
 }
 
 .form-group-checkbox label {
-  cursor: pointer;
-  color: var(--secondary-color);
-  font-weight: bold;
+    cursor: pointer;
+    color: #5e2c04;
+    font-weight: bold;
 }
 
 .btn-submit {
-  width: 100%;
-  padding: 0.75rem;
-  background: linear-gradient(to bottom, var(--accent-color), var(--secondary-color));
-  color: white;
-  border: none;
-  border-radius: var(--border-radius);
-  font-family: inherit;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  letter-spacing: 1px;
-  margin-top: 1rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(to bottom, #f5d742, #5e2c04);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    margin-top: 1rem;
 }
 
 .btn-submit:hover {
-  background: linear-gradient(to bottom, #d4b328, #6e3a08);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(245, 215, 66, 0.3);
+    background: linear-gradient(to bottom, #d4b328, #6e3a08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(245, 215, 66, 0.3);
 }
 
 .btn-submit:active {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
 .form-footer {
-  text-align: center;
-  margin-top: 1.5rem;
-  color: var(--secondary-color);
-  font-size: 0.9rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #5e2c04;
+    font-size: 0.9rem;
 }
 
 .form-link {
-  color: var(--secondary-color);
-  font-weight: bold;
-  text-decoration: none;
-  border-bottom: 1px dashed var(--accent-color);
-  transition: all 0.3s;
+    color: #5e2c04;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px dashed #f5d742;
+    transition: all 0.3s;
 }
 
 .form-link:hover {
-  color: var(--accent-color);
-  border-bottom-style: solid;
+    color: #f5d742;
+    border-bottom-style: solid;
 }
 
 .error-message {
-  color: var(--error-color);
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
-  display: block;
-  font-style: italic;
+    color: #8b0000;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    display: block;
+    font-style: italic;
 }

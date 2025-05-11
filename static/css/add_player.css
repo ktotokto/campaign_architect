@@ -1,7 +1,7 @@
 .character-sheet {
     font-family: 'Georgia', serif;
-    background-color: #2a1f14; /* Темно-коричневый фон */
-    border: 3px solid #b89683; /* Бронзовая рамка */
+    background-color: #2a1f14;
+    border: 3px solid #423127;
     padding: 30px;
     margin: 30px auto;
     width: 95%;
@@ -44,8 +44,7 @@
     margin-bottom: 20px;
     background-color: #3a250f;
     padding: 15px;
-    border-radius: var(--border-radius);
-    border-left: 4px solid #b89683;
+    border-radius: 8px;
 }
 
 .stats-table {
@@ -54,7 +53,7 @@
     margin-top: 20px;
     background-color: #3a250f;
     border: 1px solid #5e2c04;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -98,13 +97,14 @@
 .section input[type="text"],
 .section input[type="number"],
 .section textarea {
-    width: 90%;
+    display: block;
+    width: 95%;
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #5e2c04;
     background-color: #2a1f14;
     color: #f5d742;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     outline: none;
     transition: border 0.3s ease;
 }
@@ -128,58 +128,23 @@
     margin-left: 5px;
 }
 
-.btn.save-btn {
+.btn.player-btn {
     background-color: #b89683;
     color: #2a1f14;
     border: none;
     padding: 12px 24px;
     font-size: 1.1rem;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: bold;
 }
 
-.btn.save-btn:hover {
+.btn.player-btn:hover {
     background-color: #f5d742;
     color: #5e2c04;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(245, 215, 66, 0.3);
 }
 
-.btn.cancel-btn {
-    background-color: #5e2c04;
-    color: #e0d8b0;
-    padding: 12px 24px;
-    font-size: 1.1rem;
-    border-radius: var(--border-radius);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
 
-.btn.cancel-btn:hover {
-    background-color: #ff4d4d;
-    color: white;
-    transform: translateY(-2px);
-}
-
-.skills-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.skills-list li {
-    margin-bottom: 6px;
-}
-
-.skills-list input[type="checkbox"] {
-    margin-right: 8px;
-}
-
-.skills-list label {
-    font-size: 0.95rem;
-    display: inline-block;
-    padding: 4px 0;
-}

@@ -23,6 +23,7 @@ class Campaign(SqlAlchemyBase):
     monsters = relationship("Monster", back_populates="campaign")
     locations = relationship("Location", back_populates="campaign")
     events = relationship("Event", back_populates="campaign")
+    graph_edges = relationship("GraphEdge", back_populates="campaign")
 
     @property
     def created_date_formatted(self):

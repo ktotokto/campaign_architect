@@ -10,6 +10,15 @@
 </head>
 
 <body>
+{% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
 <div class="campaign-page">
     <nav class="campaign-nav">
         <a href="{{ url_for('campaigns') }}" class="back-btn">← Все кампании</a>
@@ -37,7 +46,7 @@
                             <span class="player-class">Класс: {{ player.char_class }}</span><br>
                             <span class="player-level"> Уровень: {{ player.level }}</span>
                         </a>
-                        <button class="btn delete-btn" data-player-name="{{ player.name }}">Удалить</button>
+                        <button class="btn delete-btn" data-player-id="{{ player.id }}">Удалить</button>
                     </li>
                     {% endfor %}
                 </ul>
@@ -47,42 +56,22 @@
             <div class="sidebar-section">
                 <h3>🗺️ Ресурсы</h3>
                 <div class="resources-list">
-                    <a href="#" class="resource-link">Граф-сюжета</a>
-                    <a href="#" class="resource-link">?</a>
+                    <a href="{{ url_for('campaign_graph', title=campaign.title) }}" class="resource-link">Граф событий</a>
                 </div>
             </div>
         </aside>
 
         <main class="campaign-main">
             <div class="campaign-tabs">
-                <a class="tab-btn active" href="{{ url_for('current_campaigns', title=campaign.title) }}">📝 Заметки</a>
-                <a class="tab-btn" href="{{ url_for('campaign_npcs', title=campaign.title) }}">🧙 Персонажи</a>
-                <a class="tab-btn">📖 Сюжет</a>
-                <a class="tab-btn">Заклинания</a>
-                <a class="tab-btn">Монстры</a>
-                <a class="tab-btn">Локации</a>
+                <a class="tab-btn" href="{{ url_for('current_campaigns', title=campaign.title) }}">Сюжет</a>
+                <a class="tab-btn" href="{{ url_for('campaign_npcs', title=campaign.title) }}">Персонажи</a>
+                <a class="tab-btn" href="{{ url_for('campaign_spells', title=campaign.title) }}">Заклинания</a>
+                <a class="tab-btn" href="{{ url_for('campaign_monsters', title=campaign.title) }}">Монстры</a>
+                <a class="tab-btn" href="{{ url_for('campaign_locations', title=campaign.title) }}">Локации</a>
+                <a class="tab-btn" href="{{ url_for('campaign_items', title=campaign.title) }}">Предметы</a>
             </div>
 
             {% block content %}{% endblock %}
-
-            <div class="tab-content" id="sessions">
-                <div class="sessions-list">
-                    {% for session in campaign.sessions %}
-                    <div class="session-card">
-                        <div class="session-header">
-                            <h4>Сессия #{{ session.number }}: {{ session.title }}</h4>
-                            <span class="session-date">{{ session.date }}</span>
-                        </div>
-                        <p class="session-summary">{{ session.summary }}</p>
-                        <div class="session-actions">
-                            <a href="#" class="btn session-btn">📝 Заметки</a>
-                            <a href="#" class="btn session-btn">🎭 Отчет</a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    <button class="btn add-session-btn">+ Новая сессия</button>
-                </div>
-            </div>
         </main>
     </div>
     <footer class="campaign-footer">
@@ -90,6 +79,7 @@
         <p>Последнее изменение: {{ campaign.updated_date_formatted }}</p>
     </footer>
 </div>
-<script src="{{ url_for('static', filename='js/delete-player.js') }}"></script>
+<script src="{{ url_for('static', filename='js/delete.js') }}"></script>
+<script src="{{ url_for('static', filename='js/campaign.js') }}"></script>
 {% block scripts %}{% endblock %}
 </body>

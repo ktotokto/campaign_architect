@@ -4,6 +4,7 @@ from wtforms.fields.simple import BooleanField
 from wtforms.validators import DataRequired, Length
 
 
+
 class LoginForm(FlaskForm):
     username = StringField('Имя пользователя', validators=[
         DataRequired('Поле обязательно для заполнения'),

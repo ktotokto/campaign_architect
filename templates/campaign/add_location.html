@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_player.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="tab-content active">
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="character-sheet">
+            <div class="sheet-header">
+                <h2>Локация</h2>
+                {{ form.name(class="input", placeholder="Название") }}
+
+                {% for error in form.name.errors %}
+                    <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="section">
+                <h3>Основные параметры</h3>
+                {{ form.type(class="form-input", placeholder="Город / Подземелье / Замок") }}
+
+                {{ form.description(rows="4", class="input", placeholder="Описание локации...") }}
+            </div>
+
+            <div class="section">
+                <h3>Изображение</h3>
+                <input type="file" name="image" accept="image/*" class="form-input">
+            </div>
+
+            <div class="section">
+                <button type="submit" class="btn save-btn">Сохранить</button>
+                <button type="button" class="btn cancel-btn" onclick="window.location.href='{{ url_for('campaign_locations', title=campaign.title) }}'">Отмена</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
