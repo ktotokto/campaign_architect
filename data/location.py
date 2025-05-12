@@ -13,4 +13,3 @@ class Location(SqlAlchemyBase):
     campaign_id = sa.Column(sa.Integer, sa.ForeignKey('campaigns.id'))
 
     campaign = relationship("Campaign", back_populates="locations")
-    npcs = relationship("NPC", back_populates="location")

@@ -4,10 +4,10 @@ from const import INVALID_URL_CHARS
 from data.db_session import create_session
 
 
-def no_invalid_url_chars(message="Недопустимые символы в названии"):
+def no_invalid_url_chars(message="Недопустимые символы в названии или слишком большая длина"):
     def _no_invalid_url_chars(form, field):
         value = field.data
-        if any(char in INVALID_URL_CHARS for char in value):
+        if any(char in INVALID_URL_CHARS for char in value) or len(value) > 30:
             flash(message, 'error')
             field.errors.append(message)
             return False

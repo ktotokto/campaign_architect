@@ -37,7 +37,7 @@
             </div>
 
             <div class="player-list-container">
-                <h3>👥 Игроки ({{ campaign.players|length }})</h3>
+                <h3>👥 Игроки</h3>
                 <ul class="players-list" data-campaign-title="{{ campaign.title if campaign else '' }}">
                     {% for player in campaign.players %}
                     <li class="player-card">
@@ -47,6 +47,7 @@
                             <span class="player-level"> Уровень: {{ player.level }}</span>
                         </a>
                         <button class="btn delete-btn" data-player-id="{{ player.id }}">Удалить</button>
+                        <div id="players-container" data-campaign-title="{{ campaign.title.replace(' ', '_') }}"></div>
                     </li>
                     {% endfor %}
                 </ul>
@@ -63,7 +64,7 @@
 
         <main class="campaign-main">
             <div class="campaign-tabs">
-                <a class="tab-btn" href="{{ url_for('current_campaigns', title=campaign.title) }}">Сюжет</a>
+                <a class="tab-btn" href="{{ url_for('campaign_events', title=campaign.title) }}">Сюжет</a>
                 <a class="tab-btn" href="{{ url_for('campaign_npcs', title=campaign.title) }}">Персонажи</a>
                 <a class="tab-btn" href="{{ url_for('campaign_spells', title=campaign.title) }}">Заклинания</a>
                 <a class="tab-btn" href="{{ url_for('campaign_monsters', title=campaign.title) }}">Монстры</a>

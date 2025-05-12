@@ -16,14 +16,14 @@ class Campaign(SqlAlchemyBase):
     user_id = sa.Column(sa.Integer, sa.ForeignKey('users.id'))
 
     user = relationship("User", back_populates="campaigns")
-    players = relationship("Player", back_populates="campaign")
-    items = relationship("Item", back_populates="campaign")
-    npcs = relationship("NPC", back_populates="campaign")
-    spells = relationship("Spell", back_populates="campaign")
-    monsters = relationship("Monster", back_populates="campaign")
-    locations = relationship("Location", back_populates="campaign")
-    events = relationship("Event", back_populates="campaign")
-    graph_edges = relationship("GraphEdge", back_populates="campaign")
+    players = relationship("Player", back_populates="campaign", cascade="all, delete")
+    items = relationship("Item", back_populates="campaign", cascade="all, delete")
+    npcs = relationship("NPC", back_populates="campaign", cascade="all, delete")
+    spells = relationship("Spell", back_populates="campaign", cascade="all, delete")
+    monsters = relationship("Monster", back_populates="campaign", cascade="all, delete")
+    locations = relationship("Location", back_populates="campaign", cascade="all, delete")
+    events = relationship("Event", back_populates="campaign", cascade="all, delete")
+    graph_edges = relationship("GraphEdge", back_populates="campaign", cascade="all, delete")
 
     @property
     def created_date_formatted(self):

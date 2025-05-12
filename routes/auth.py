@@ -1,7 +1,7 @@
 import os
 
 from flask import render_template, redirect, url_for, flash, current_app
-from flask_login import LoginManager, login_user, logout_user, current_user
+from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 
 from data.db_session import create_session
 from data.user import User
@@ -97,6 +97,7 @@ def setup_auth_routes(app):
         return render_template('login.html', form=form)
 
     @app.route('/logout')
+    @login_required
     def logout():
         logout_user()
         flash("Вы вышли из аккаунта", "success")

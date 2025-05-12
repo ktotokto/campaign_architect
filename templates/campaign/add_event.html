@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_player.css') }}">
+<style>
+.form-input {
+    width: 100%;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="tab-content active">
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="character-sheet">
+            <div class="sheet-header">
+                <h2>Событие</h2>
+                {{ form.name(class="input") }}
+
+                {% for error in form.name.errors %}
+                    <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="section">
+                <h3>Описание</h3>
+                {{ form.description(rows="4", class="input") }}
+            </div>
+
+            <div class="section">
+                <button type="submit" class="btn save-btn">💾 Сохранить</button>
+                <button type="button" class="btn cancel-btn"
+                        onclick="window.location.href='{{ url_for('campaign_events', title=campaign.title) }}'">❌ Отмена</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -45,7 +45,7 @@ def setup_player_routes(app):
                 session.add(new_char)
                 session.commit()
 
-                return redirect(url_for('current_campaigns', title=title))
+                return redirect(url_for('campaign_events', title=title))
 
             if not form.is_submitted():
                 form.strength.data = 10
@@ -88,13 +88,13 @@ def setup_player_routes(app):
 
             if not player:
                 flash("Персонаж не найден", "error")
-                return redirect(url_for("current_campaigns", title=title))
+                return redirect(url_for("campaign_events", title=title))
 
             if form.validate_on_submit():
                 form.populate_obj(player)
                 player.skills = ",".join(form.skills.data) if form.skills.data else ""
                 session.commit()
-                return redirect(url_for('current_campaigns', title=title))
+                return redirect(url_for('campaign_events', title=title))
 
             if not form.is_submitted():
                 form.name.data = player.name
@@ -116,12 +116,12 @@ def setup_player_routes(app):
             session.rollback()
             app.logger.error(f"Ошибка базы данных при редактировании: {e}")
             flash("Ошибка при сохранении изменений", "error")
-            return redirect(url_for("current_campaigns", title=title))
+            return redirect(url_for("campaign_events", title=title))
         except Exception as e:
             session.rollback()
             app.logger.error(f"Неожиданная ошибка: {e}")
             flash("Произошла критическая ошибка", "error")
-            return redirect(url_for("current_campaigns", title=title))
+            return redirect(url_for("campaign_events", title=title))
         finally:
             session.close()
 

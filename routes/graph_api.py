@@ -1,121 +1,95 @@
 from datetime import datetime
-from urllib import request
 
-from flask import redirect, url_for, render_template, jsonify
+from flask import render_template, jsonify, request
 from flask_login import current_user, login_required
 
-from data.campaign import Campaign
-from data.db_session import create_session
 from data.graph_edge import GraphEdge
+from utils import get_campaign_by_title
 
 
 def setup_graph_routes(app):
-    @app.route('/campaigns/<title>/graph')
+    @app.route('/campaigns/<title>/campaign_graph')
     @login_required
     def campaign_graph(title):
-        if not current_user.is_authenticated:
-            return redirect(url_for('login'))
-
-        session = create_session()
+        campaign, session = get_campaign_by_title(title, current_user.id)
         try:
-            campaign = session.query(Campaign).filter(
-                Campaign.title == title,
-                Campaign.user_id == current_user.id
-            ).first()
-
-            events = campaign.events
-            npcs = campaign.npcs
-            items = campaign.items
-            players = campaign.players
-
-            return render_template('campaign/campaign_graph.html', campaign=campaign,
-                                   events=events, npcs=npcs, items=items, players=players)
+            return render_template('campaign/campaign_graph.html', title=title, events=campaign.events)
         finally:
             session.close()
 
     @app.route('/api/campaigns/<title>/graph', methods=['GET'])
     @login_required
     def get_campaign_graph(title):
-        session = create_session()
+        campaign, session = get_campaign_by_title(title, current_user.id)
         try:
-            campaign = session.query(Campaign).filter(
-                Campaign.title == title,
-                Campaign.user_id == current_user.id
-            ).first()
+            if not campaign:
+                return jsonify({"success": False, "message": "Кампания не найдена"}), 404
 
-            nodes = []
-            edges = []
+            nodes = [{"id": event.id, "label": event.name} for event in campaign.events]
 
-            for event in campaign.events:
-                nodes.append({
-                    "id": f"event_{event.id}",
-                    "label": event.title,
-                    "group": "event",
-                    "title": event.description or "",
-                    "shape": "box"
-                })
+            edges = [{
+                "id": edge.id,
+                "from": edge.from_event_id,
+                "to": edge.to_event_id,
+                "label": edge.label or "",
+            } for edge in campaign.graph_edges]
 
-            for npc in campaign.npcs:
-                nodes.append({
-                    "id": f"npc_{npc.id}",
-                    "label": npc.name,
-                    "group": "npc",
-                    "shape": "circle"
-                })
-                edges.append({
-                    "from": f"event_{event.id}",
-                    "to": f"npc_{npc.id}",
-                    "label": "Участвует"
-                })
-
-            for item in campaign.items:
-                nodes.append({
-                    "id": f"item_{item.id}",
-                    "label": item.name,
-                    "group": "item",
-                    "shape": "dot"
-                })
-                edges.append({
-                    "from": f"event_{event.id}",
-                    "to": f"item_{item.id}",
-                    "label": "Использовано"
-                })
-
-            return jsonify({
-                "nodes": nodes,
-                "edges": edges
-            })
+            return jsonify({"nodes": nodes, "edges": edges})
         finally:
             session.close()
 
-    @app.route('/api/campaigns/<title>/graph', methods=['POST'])
+    @app.route('/api/campaigns/<title>/add_connection', methods=['POST'])
     @login_required
-    def save_campaign_graph(title):
-        data = request.get_json()
-        campaign = create_session().query(Campaign).filter(
-            Campaign.title == title,
-            Campaign.user_id == current_user.id
-        ).first()
-
-        if not campaign:
-            return jsonify({"success": False, "message": "Кампания не найдена"}), 404
-
-        session = create_session()
+    def add_connection(title):
+        campaign, session = get_campaign_by_title(title, current_user.id)
         try:
-            session.query(GraphEdge).filter(GraphEdge.campaign_id == campaign.id).delete()
+            if not campaign:
+                return jsonify({"success": False, "message": "Кампания не найдена"}), 404
 
-            for edge in data["edges"]:
-                new_edge = GraphEdge(
-                    from_id=edge["from"],
-                    to_id=edge["to"],
-                    label=edge.get("label", "Связано"),
-                    campaign_id=campaign.id
-                )
-                session.add(new_edge)
+            if not request.is_json:
+                return jsonify({"success": False, "message": "Ожидается JSON"}), 400
 
+            data = request.get_json()
+            new_edge = GraphEdge(
+                campaign_id = campaign.id,
+                from_event_id=data['from'],
+                to_event_id=data['to'],
+                label=data.get('label', '')
+            )
+            session.add(new_edge)
             campaign.updated_date = datetime.now()
             session.commit()
-            return jsonify({"success": True})
+            return jsonify({
+                "success": True,
+                "edge": {
+                    "id": new_edge.id,
+                    "from": new_edge.from_event_id,
+                    "to": new_edge.to_event_id,
+                    "label": new_edge.label
+                }
+            })
+        except Exception as e:
+            session.rollback()
+            return jsonify({"success": False, "error": str(e)}), 500
+        finally:
+            session.close()
+
+    @app.route('/api/campaigns/<title>/delete_connection/<int:edge_id>', methods=['DELETE'])
+    @login_required
+    def delete_connection(title, edge_id):
+        campaign, session = get_campaign_by_title(title, current_user.id)
+        try:
+            edge = session.query(GraphEdge).filter(
+                GraphEdge.id == edge_id,
+                GraphEdge.from_event.has(campaign_id=campaign.id)
+            ).first()
+
+            if not edge:
+                return jsonify({"success": False, "message": "Связь не найдена"})
+
+            session.delete(edge)
+            session.commit()
+            return jsonify({"success": True, "message": "Связь удалена"})
         except Exception as e:
             session.rollback()
             return jsonify({"success": False, "message": str(e)}), 500

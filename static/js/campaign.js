@@ -170,4 +170,33 @@ document.addEventListener("DOMContentLoaded", function () {
             input?.addEventListener("input", filterLocationTable);
         });
     }
+
+    const eventRows = document.querySelectorAll(".event-row");
+    const eventNameInput = document.getElementById("search-event-name");
+    const eventLocationInput = document.getElementById("filter-event-location");
+
+    function filterEventTable() {
+        const nameQuery = eventNameInput ? eventNameInput.value.toLowerCase().trim() : "";
+        const locationQuery = eventLocationInput ? eventLocationInput.value.trim().toLowerCase() : "";
+
+        eventRows.forEach(row => {
+            const name = row.dataset.name?.toLowerCase() || "";
+            const location = row.dataset.location?.toLowerCase() || "";
+
+            const matchesName = !nameQuery || name.includes(nameQuery);
+            const matchesLocation = !locationQuery || location.includes(locationQuery);
+
+            if (matchesName && matchesLocation) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
+    if (eventRows.length > 0) {
+        [eventNameInput, eventLocationInput].forEach(input => {
+            input?.addEventListener("input", filterEventTable);
+        });
+    }
 });

@@ -1,8 +1,9 @@
 import os
 
-from flask import render_template, redirect, url_for, flash, current_app
+from flask import render_template, redirect, url_for, flash, current_app, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from shutil import rmtree
 
 from data.campaign import Campaign
 from data.db_session import create_session
@@ -97,7 +98,7 @@ def setup_campaign_routes(app):
                 flash("Кампания не найдена", "error")
                 return redirect(url_for("campaigns"))
 
-            return render_template('campaign/campaign_notes.html',
+            return render_template('campaign/campaign_events.html',
                                    campaign=campaign,
                                    username=current_user.username)
         finally:
@@ -170,4 +171,49 @@ def setup_campaign_routes(app):
         finally:
             session.close()
 
+    @app.route('/campaigns/<title>/campaign_events')
+    @login_required
+    def campaign_events(title):
+        campaign, session = get_campaign_by_title(title, current_user.id)
+        try:
+            if not campaign:
+                flash("Кампания не найдена")
+                return redirect(url_for('campaigns'))
 
+            return render_template('campaign/campaign_events.html', campaign=campaign)
+        finally:
+            session.close()
+
+    @app.route('/campaigns/<title>/delete_campaign', methods=['POST'])
+    @login_required
+    def delete_campaign(title):
+        campaign, session = get_campaign_by_title(title, current_user.id)
+        try:
+            if not campaign:
+                return jsonify({"success": False, "message": "Кампания не найдена"}), 404
+
+            path = os.path.join(current_app.root_path, 'static', 'images', 'campaigns', f'user_{current_user.id}',
+                                f'campaign_{campaign.id}')
+            if os.path.exists(path):
+                rmtree(path)
+            session.delete(campaign)
+            session.commit()
+            return jsonify({"success": True})
+        except Exception as e:
+            session.rollback()
+            return jsonify({"success": False, "message": str(e)}), 500
+        finally:
+            session.close()
+
+    @app.route('/profile')
+    @login_required
+    def profile():
+        session = create_session()
+        try:
+            campaigns_list = session.query(Campaign).filter(
+                Campaign.user_id == current_user.id
+            ).all()
+
+            return render_template('profile.html', user=current_user, campaigns=campaigns_list)
+        finally:
+            session.close()

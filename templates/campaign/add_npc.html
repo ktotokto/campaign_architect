@@ -22,16 +22,6 @@
             </div>
 
             <div class="section">
-                <h3>Локация</h3>
-                <select id="location" name="location" class="form-input">
-                    <option value="">Выберите локацию</option>
-                    {% for location in locations %}
-                        <option value="{{ location.name }}">{{ location.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div class="section">
                 <h3>Описание</h3>
                 {{ form.background(class="input", placeholder="Описание персонажа...") }}
             </div>

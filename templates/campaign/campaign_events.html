@@ -1,0 +1,37 @@
+{% extends "campaign.html" %}
+{% block content %}
+<div class="tab-content active">
+    <div class="filters">
+        <input type="text" id="search-event-name" placeholder="Поиск по названию..." class="form-input">
+    </div>
+
+    <table class="stats-table" id="event-table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+               {% for event in campaign.events %}
+        <tbody>
+            <tr class="event-row"
+                data-name="{{ event.title }}"
+                data-location="{{ event.location.name if event.location else '' }}">
+                <td>{{ event.name }}</td>
+                <td>
+                    <a href="{{ url_for('event_editor', title=campaign.title, event_name=event.name) }}" class="btn save-btn">Редактировать</a>
+                    <button type="button" class="btn cancel-btn event-delete-btn" data-event-id="{{ event.id }}">Удалить</button>
+                    <div id="events-container" data-campaign-title="{{ campaign.title.replace(' ', '_') }}"></div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('add_event', title=campaign.title) }}" class="btn add-player-btn">+ Добавить событие</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/campaign.js') }}"></script>
+{% endblock %}

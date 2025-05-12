@@ -4,7 +4,6 @@
     <div class="filters">
         <input type="text" id="search-npc-name" placeholder="Поиск по имени..." class="form-input">
         <input type="text" id="filter-npc-class" placeholder="Фильтр по классу" class="form-input">
-        <input type="text" id="filter-npc-location" placeholder="Фильтр по локации" class="form-input">
         <input type="number" id="filter-npc-level" placeholder="Уровень" min="1" max="20" class="form-input">
     </div>
 
@@ -15,7 +14,6 @@
                 <th>Изображение</th>
                 <th>Имя</th>
                 <th>Класс</th>
-                <th>Локация</th>
                 <th>Уровень</th>
                 <th>Действия</th>
             </tr>
@@ -24,7 +22,6 @@
             {% for npc in campaign.npcs %}
             <tr class="npc-row"  data-name="{{ npc.name }}"
                 data-class="{{ npc.char_class or '' }}"
-                data-location="{{ npc.location or '' }}"
                 data-level="{{ npc.level or 0 }}">
                     <td>
                         {% if npc.image %}
@@ -35,7 +32,6 @@
                     </td>
                     <td>{{ npc.name }}</td>
                     <td>{{ npc.char_class or '—' }}</td>
-                    <td>{{ npc.location or '—' }}</td>
                     <td>{{ npc.level or '—' }}</td>
                     <td>
                         <a href="{{ url_for('npc_editor', title=campaign.title, name_npc=npc.name) }}" class="btn player-btn">Редактировать</a>

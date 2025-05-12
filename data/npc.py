@@ -21,7 +21,5 @@ class NPC(SqlAlchemyBase):
     image = sa.Column(sa.String(255))
 
     campaign_id = sa.Column(sa.Integer, sa.ForeignKey('campaigns.id'))
-    location_id = sa.Column(sa.Integer, sa.ForeignKey('locations.id'))
 
     campaign = relationship("Campaign", back_populates="npcs")
-    location = relationship("Location", back_populates="npcs")

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'navigate.html' %}
+<div class="tab-content active">
+    <h2 style="font-size: 2.5rem;">Профиль пользователя</h2>
+
+    <div class="profile-container" style="font-size: 2rem;">
+        <div class="profile-card" style="padding: 2rem; font-size: 2rem;">
+            <div class="profile-header">
+                <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">Имя: {{ user.username }}</h3>
+                <p class="email" style="font-size: 1.8rem; color: #f5d742;">Почта: {{ user.email }}</p>
+            </div>
+
+            <div class="profile-details" style="margin-top: 2.5rem;">
+                <div class="info-row" style="margin-bottom: 1.5rem;">
+                    <span class="label" style="color: #f5d742; font-weight: bold;">Кампаний создано:</span>
+                    {% if campaigns %}
+                        <span class="value" style="color: #e0d8b0; font-size: 2rem;">{{ campaigns|length }}</span>
+                    {% else %}
+                        <span class="value" style="color: #bbb; font-size: 2rem;">0</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="profile-actions" style="margin-top: 2rem;">
+                <a href="{{ url_for('logout') }}" class="btn cancel-btn" style="font-size: 2rem; padding: 1rem 2rem;">Выйти</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

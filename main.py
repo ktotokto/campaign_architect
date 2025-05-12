@@ -14,6 +14,7 @@ from routes.players import setup_player_routes
 from routes.npcs import setup_npc_routes
 from routes.spells import setup_spell_routes
 from routes.monsters import setup_monster_routes
+from routes.events import setup_event_routes
 from routes.graph_api import setup_graph_routes
 
 app = Flask(__name__)
@@ -34,6 +35,7 @@ setup_spell_routes(app)
 setup_item_routes(app)
 setup_location_routes(app)
 setup_monster_routes(app)
+setup_event_routes(app)
 setup_graph_routes(app)
 
 if __name__ == '__main__':

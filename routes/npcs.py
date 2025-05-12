@@ -23,7 +23,6 @@ def npc_form(npc, form):
     npc.intelligence = form.intelligence.data
     npc.wisdom = form.wisdom.data
     npc.charisma = form.charisma.data
-    npc.location = request.form.get("location") or None
 
 
 def setup_npc_routes(app):
@@ -33,7 +32,6 @@ def setup_npc_routes(app):
     def add_npc(title):
         campaign, session = get_campaign_by_title(title, current_user.id)
         form = NpcForm(campaign_id=campaign.id)
-        locations = [loc.name for loc in campaign.locations]
 
         if not campaign:
             flash('Кампания не найдена', 'error')
@@ -53,7 +51,6 @@ def setup_npc_routes(app):
                     intelligence=form.intelligence.data,
                     wisdom=form.wisdom.data,
                     charisma=form.charisma.data,
-                    location=request.form.get("location") or None,
                     campaign_id=campaign.id
                 )
 
@@ -98,7 +95,7 @@ def setup_npc_routes(app):
             form.wisdom.data = 10
             form.charisma.data = 10
 
-        return render_template('campaign/add_npc.html', form=form, locations=locations, campaign=campaign)
+        return render_template('campaign/add_npc.html', form=form, campaign=campaign)
 
     @app.route('/campaigns/<title>/add_npc/<name_npc>', methods=['GET', 'POST'])
     @login_required
@@ -115,7 +112,6 @@ def setup_npc_routes(app):
             NPC.campaign_id == campaign.id
         ).first()
         form = NpcForm(obj=npc, campaign_id=campaign.id)
-        locations = [loc.name for loc in campaign.locations]
 
         if not npc:
             flash("Персонаж не найден", "error")
@@ -154,7 +150,7 @@ def setup_npc_routes(app):
             form.wisdom.data = npc.wisdom
             form.charisma.data = npc.charisma
 
-        return render_template('campaign/add_npc.html', form=form, locations=locations, campaign=campaign)
+        return render_template('campaign/add_npc.html', form=form, campaign=campaign)
 
     @app.route('/campaigns/<title>/delete_npc/<int:npc_id>', methods=['POST'])
     @login_required

@@ -19,6 +19,8 @@
           <p>{{ campaign.description|default("Описание отсутствует", true) }}</p>
           <div class="campaign-actions">
             <a href="{{ url_for('current_campaigns', title=campaign.title) }}" class="btn btn-primary">Открыть</a>
+            <button type="button" class="btn cancel-btn campaign-delete-btn" data-campaign-title="{{ campaign.title }}">Удалить</button>
+            <div id="campaigns-container" data-campaign-title="{{ campaign.title.replace(' ', '_') }}"></div>
           </div>
         </div>
       </div>
@@ -33,5 +35,5 @@
   {% endif %}
 </div>
 
-<script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+<script src="{{ url_for('static', filename='js/delete.js') }}"></script>
 {% endblock %}
