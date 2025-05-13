@@ -1,57 +1,6 @@
 {% extends "base.html" %}
 {% block styles %}
-<style>
-    #mynetwork {
-        width: 100%;
-        height: 600px;
-        border: 1px solid #5e2c04;
-        border-radius: 8px;
-        background-color: #2a1f14;
-        margin-top: 1rem;
-    }
-
-    .form-group {
-        margin-bottom: 1rem;
-    }
-
-    .form-input, select.form-input {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
-        background-color: #3a250f;
-        color: #e0d8b0;
-        border: 1px solid #5e2c04;
-        border-radius: 4px;
-    }
-
-    .form-input:focus {
-        border-color: #f5d742;
-        box-shadow: 0 0 0 3px rgba(245, 215, 66, 0.3);
-    }
-
-    .btn.save-btn {
-        background-color: #f5d742;
-        color: #5e2c04;
-        font-weight: bold;
-    }
-
-    .btn.cancel-btn {
-        background-color: #5e2c04;
-        color: #e0d8b0;
-        font-weight: bold;
-    }
-
-    .btn.save-btn:hover {
-        background-color: #fff;
-        color: #5e2c04;
-        transform: translateY(-2px);
-    }
-
-    .btn.cancel-btn:hover {
-        background-color: #ff4500;
-        color: white;
-    }
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/graph.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -76,115 +25,11 @@
             <button type="button" class="btn back-btn" onclick="window.history.back()">🡨 Назад</button>
         </form>
     </div>
-    <div id="mynetwork"></div>
+    <div id="mynetwork" data-campaign-title="{{ title }}"></div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
-<script>
-    const campaignTitle = "{{ title }}";
-    let network = null;
-
-    async function loadGraph() {
-        try {
-            const res = await fetch(`/api/campaigns/${encodeURIComponent(campaignTitle)}/graph`);
-            if (!res.ok) throw new Error("Ошибка сети при загрузке графа");
-
-            const data = await res.json();
-
-            const nodes = new vis.DataSet(data.nodes);
-            const edges = new vis.DataSet(data.edges);
-
-            const container = document.getElementById("mynetwork");
-            const options = {
-                nodes: {
-                    shape: 'box',
-                    color: { background: '#3a250f', border: '#f5d742' },
-                    font: { color: '#e0d8b0' }
-                },
-                edges: {
-                    color: '#f5d742',
-                    arrows: { to: true },
-                    smooth: { enabled: true, type: 'curvedCW' },
-                    font: { color: '#f5d742', size: 14 }
-                },
-                physics: {
-                    enabled: true,
-                    stabilization: true
-                }
-            };
-
-            network = new vis.Network(container, { nodes, edges }, options);
-
-            network.on("click", function(params) {
-                if (params.event && params.event.target && params.event.target.classList.contains("vis-edge")) {
-                    const edgeId = params.event.target.dataset?.id;
-                    if (!edgeId) return;
-
-                    if (!confirm("Удалить эту связь?")) return;
-
-                    fetch(`/api/campaigns/${campaignTitle}/delete_connection/${edgeId}`, {
-                        method: "DELETE",
-                        headers: { "X-Requested-With": "XMLHttpRequest" }
-                    })
-                    .then(response => {
-                        if (!response.ok) throw new Error("Ошибка сети");
-                        return response.json();
-                    })
-                    .then(result => {
-                        if (result.success) {
-                            edges.remove(edgeId);
-                            alert("Связь удалена");
-                        } else {
-                            alert("Ошибка: " + result.message || "Не удалось удалить связь");
-                        }
-                    })
-                    .catch(err => {
-                        console.error("Ошибка запроса:", err);
-                        alert("Произошла ошибка при удалении связи");
-                    });
-                }
-            });
-
-            const fromSelect = document.getElementById("from-event");
-            const toSelect = document.getElementById("to-event");
-
-            data.nodes.forEach(node => {
-                fromSelect.add(new Option(node.label, node.id));
-                toSelect.add(new Option(node.label, node.id));
-            });
-
-            document.getElementById("connection-form").addEventListener("submit", async (e) => {
-                e.preventDefault();
-
-                const fromId = parseInt(fromSelect.value);
-                const toId = parseInt(toSelect.value);
-                const label = document.getElementById("connection-label").value.trim();
-
-                const response = await fetch(`/api/campaigns/${encodeURIComponent(campaignTitle)}/add_connection`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ from: fromId, to: toId, label: label })
-                });
-
-                const result = await response.json();
-                if (result.success) {
-                    edges.add(result.edge);
-                    alert("Связь добавлена");
-                } else {
-                    alert("Ошибка: " + result.message || "Не удалось добавить связь");
-                }
-            });
-        } catch (err) {
-            console.error("Ошибка при загрузке графа:", err);
-            alert("Не удалось загрузить граф событий");
-        }
-    }
-
-    window.addEventListener("load", () => {
-        const container = document.getElementById("mynetwork");
-        if (container) loadGraph();
-    });
-</script>
+<script src="{{ url_for('static', filename='js/graph.js') }}"></script>
 {% endblock %}

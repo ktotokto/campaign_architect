@@ -34,3 +34,13 @@ def save_image(image, campaign_id, user_id, essence_id, directory):
             raise IOError(f"Ошибка сохранения изображения: {e}")
     return None
 
+
+def check_and_create_directories():
+    db_dir = "db"
+    if not os.path.exists(db_dir):
+        os.makedirs(db_dir)
+
+    campaigns_dir = os.path.join("static", "images", "campaigns")
+    if not os.path.exists(campaigns_dir):
+        os.makedirs(campaigns_dir)
+

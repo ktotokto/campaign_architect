@@ -1,0 +1,50 @@
+#mynetwork {
+    width: 100%;
+    height: 600px;
+    border: 1px solid #5e2c04;
+    border-radius: 8px;
+    background-color: #2a1f14;
+    margin-top: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-input, select.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background-color: #3a250f;
+    color: #e0d8b0;
+    border: 1px solid #5e2c04;
+    border-radius: 4px;
+}
+
+.form-input:focus {
+    border-color: #f5d742;
+    box-shadow: 0 0 0 3px rgba(245, 215, 66, 0.3);
+}
+
+.btn.save-btn {
+    background-color: #f5d742;
+    color: #5e2c04;
+    font-weight: bold;
+}
+
+.btn.cancel-btn {
+    background-color: #5e2c04;
+    color: #e0d8b0;
+    font-weight: bold;
+}
+
+.btn.save-btn:hover {
+    background-color: #fff;
+    color: #5e2c04;
+    transform: translateY(-2px);
+}
+
+.btn.cancel-btn:hover {
+    background-color: #ff4500;
+    color: white;
+}

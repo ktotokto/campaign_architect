@@ -16,6 +16,7 @@ from routes.spells import setup_spell_routes
 from routes.monsters import setup_monster_routes
 from routes.events import setup_event_routes
 from routes.graph_api import setup_graph_routes
+from utils import check_and_create_directories
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(16)
@@ -23,6 +24,8 @@ app.config['SECRET_KEY'] = secrets.token_hex(16)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+check_and_create_directories()
 
 global_init("db/campaign.db")
 
